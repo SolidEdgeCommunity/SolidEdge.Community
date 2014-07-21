@@ -46,6 +46,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddIn\EdgeBarControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddIn\EdgeBarController.cs" />
+    <Compile Include="AddIn\EdgeBarPage.cs" />
+    <Compile Include="AddIn\EdgeBarPageAttribute.cs" />
+    <Compile Include="AddIn\ExtensionMethods.cs" />
+    <Compile Include="AddIn\NativeResourceAttribute.cs" />
+    <Compile Include="AddIn\Overlay.cs" />
+    <Compile Include="AddIn\OverlayController.cs" />
+    <Compile Include="AddIn\Ribbon.cs" />
+    <Compile Include="AddIn\RibbonControl.cs" />
+    <Compile Include="AddIn\RibbonController.cs" />
+    <Compile Include="AddIn\RibbonGroup.cs" />
+    <Compile Include="AddIn\RibbonTab.cs" />
+    <Compile Include="AddIn\SolidEdgeAddIn.cs" />
     <Compile Include="ConnectionPointController.cs" />
     <Compile Include="OleMessageFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
