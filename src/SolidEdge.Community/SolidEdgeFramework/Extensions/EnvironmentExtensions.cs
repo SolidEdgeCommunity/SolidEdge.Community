@@ -5,13 +5,24 @@ using System.Text;
 
 namespace SolidEdgeFramework.Extensions
 {
+    /// <summary>
+    /// SolidEdgeFramework.Environment extension methods.
+    /// </summary>
     public static class EnvironmentExtensions
     {
+        /// <summary>
+        /// Returns a Guid representing the environment category.
+        /// </summary>
         public static Guid GetCategoryId(this SolidEdgeFramework.Environment environment)
         {
             return new Guid(environment.CATID);
         }
 
+        /// <summary>
+        /// Returns a Type representing the corresponding command constants for a particular environment.
+        /// </summary>
+        /// <param name="environment"></param>
+        /// <returns></returns>
         public static Type GetCommandConstantType(this SolidEdgeFramework.Environment environment)
         {
             var categoryId = environment.GetCategoryId();
@@ -108,7 +119,10 @@ namespace SolidEdgeFramework.Extensions
             return null;
         }
 
-        public static SolidEdgeFramework.Environment LookupByCategoryId(this SolidEdgeFramework.Environments environments, string name)
+        /// <summary>
+        /// Returns a SolidEdgeFramework.Environment by name.
+        /// </summary>
+        public static SolidEdgeFramework.Environment LookupByName(this SolidEdgeFramework.Environments environments, string name)
         {
             for (int i = 1; i <= environments.Count; i++)
             {
@@ -122,7 +136,10 @@ namespace SolidEdgeFramework.Extensions
             return null;
         }
 
-        public static SolidEdgeFramework.Environment LookupByName(this SolidEdgeFramework.Environments environments, Guid categoryId)
+        /// <summary>
+        /// Returns a SolidEdgeFramework.Environment by category id..
+        /// </summary>
+        public static SolidEdgeFramework.Environment LookupByCategoryId(this SolidEdgeFramework.Environments environments, Guid categoryId)
         {
             for (int i = 1; i <= environments.Count; i++)
             {

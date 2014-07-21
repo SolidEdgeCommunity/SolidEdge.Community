@@ -7,6 +7,9 @@ using System.Threading;
 
 namespace SolidEdge.Community.AddIn
 {
+    /// <summary>
+    /// EdgeBar controller class.
+    /// </summary>
     public sealed class EdgeBarController : IDisposable,
         SolidEdgeFramework.ISEAddInEdgeBarEvents,
         SolidEdgeFramework.ISEAddInEdgeBarEventsEx

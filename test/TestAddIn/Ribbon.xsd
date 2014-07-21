@@ -1,10 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <!--
-	Schema definition for Ribbon Extensibility
+	Schema definition for Solid Edge Ribbon Extensibility
 
-	Copyright (c) Microsoft Corporation. All rights reserved.
-  http://github.com/SolidEdgeCommunity/SolidEdge/AddIn
+  https://github.com/SolidEdgeCommunity/SolidEdge.Community
 -->
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -15,8 +14,6 @@
   <xs:simpleType name="ST_String">
     <xs:annotation>
       <xs:documentation>
-        Specifies a string argument.
-        String length is limited to 1024 characters.
       </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">

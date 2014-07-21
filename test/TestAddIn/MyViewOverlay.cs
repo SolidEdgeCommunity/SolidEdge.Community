@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace TestAddIn
 {
-    class MyViewOverlay : SolidEdge.Community.AddIn.Overlay
+    class MyViewOverlay : SolidEdge.Community.AddIn.ViewOverlay
     {
         private BoundingBoxInfo _boundingBoxInfo = default(BoundingBoxInfo);
         private bool _showOpenGlBoxes = false;

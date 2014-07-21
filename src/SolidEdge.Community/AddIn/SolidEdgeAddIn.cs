@@ -21,13 +21,14 @@ namespace SolidEdge.Community.AddIn
 {
     public abstract class SolidEdgeAddIn : MarshalByRefObject, SolidEdgeFramework.ISolidEdgeAddIn
     {
+        private static SolidEdgeAddIn _instance;
         private AppDomain _isolatedDomain;
         private SolidEdgeFramework.ISolidEdgeAddIn _isolatedAddIn;
         private SolidEdgeFramework.Application _application;
         private SolidEdgeFramework.AddIn _addInInstance;
         private RibbonController _ribbonController;
         private EdgeBarController _edgeBarController;
-        private OverlayController _overlayController;
+        private ViewOverlayController _viewOverlayController;
 
         /// <summary>
         /// Public constructor
@@ -62,11 +63,12 @@ namespace SolidEdge.Community.AddIn
                 Application = UnwrapTransparentProxy(Application);
                 AddInInstance = UnwrapTransparentProxy<SolidEdgeFramework.AddIn>(AddInInstance);
 
+                _instance = this;
                 _application = (SolidEdgeFramework.Application)Application;
                 _addInInstance = AddInInstance;
                 _ribbonController = new RibbonController(this);
                 _edgeBarController = new EdgeBarController(this);
-                _overlayController = new OverlayController();
+                _viewOverlayController = new ViewOverlayController();
 
                 OnConnection(_application, ConnectMode, AddInInstance);
             }
@@ -139,17 +141,17 @@ namespace SolidEdge.Community.AddIn
                     _edgeBarController = null;
                 }
 
-                if (_overlayController != null)
+                if (_viewOverlayController != null)
                 {
                     try
                     {
-                        _overlayController.Dispose();
+                        _viewOverlayController.Dispose();
                     }
                     catch
                     {
                     }
 
-                    _overlayController = null;
+                    _viewOverlayController = null;
                 }
 
             }
@@ -162,9 +164,6 @@ namespace SolidEdge.Community.AddIn
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="controller"></param>
-        /// <param name="environmentCategory"></param>
-        /// <param name="firstTime"></param>
         public virtual void OnCreateRibbon(RibbonController controller, Guid environmentCategory, bool firstTime)
         {
         }
@@ -179,7 +178,7 @@ namespace SolidEdge.Community.AddIn
         }
 
         /// <summary>
-        /// 
+        /// Called by SolidEdgeFramework.ISolidEdgeAddIn.OnConnection().
         /// </summary>
         /// <param name="application"></param>
         /// <param name="ConnectMode"></param>
@@ -189,18 +188,15 @@ namespace SolidEdge.Community.AddIn
         }
 
         /// <summary>
-        /// 
+        /// Called by SolidEdgeFramework.ISolidEdgeAddIn.OnConnectToEnvironment().
         /// </summary>
-        /// <param name="environment"></param>
-        /// <param name="firstTime"></param>
         public virtual void OnConnectToEnvironment(SolidEdgeFramework.Environment environment, bool firstTime)
         {
         }
 
         /// <summary>
-        /// 
+        /// Called by SolidEdgeFramework.ISolidEdgeAddIn.OnDisconnection().
         /// </summary>
-        /// <param name="DisconnectMode"></param>
         public virtual void OnDisconnection(SolidEdgeFramework.SeDisconnectMode DisconnectMode)
         {
         }
@@ -233,6 +229,10 @@ namespace SolidEdge.Community.AddIn
             _isolatedAddIn = (SolidEdgeFramework.ISolidEdgeAddIn)proxyAddIn;
         }
 
+        /// <summary>
+        /// Implementation of MarshalByRefObject.InitializeLifetimeService(). Not intended to be called directly.
+        /// </summary>
+        /// <returns></returns>
         public override object InitializeLifetimeService()
         {
             return null;
@@ -304,9 +304,24 @@ namespace SolidEdge.Community.AddIn
         public SolidEdgeFramework.Application Application { get { return _application; } }
 
         /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEApplicationEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEApplicationEvents_Event ApplicationEvents { get { return _application.ApplicationEvents as SolidEdgeFramework.ISEApplicationEvents_Event; } }
+
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEApplicationWindowEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEApplicationWindowEvents_Event ApplicationWindowEvents { get { return _application.ApplicationWindowEvents as SolidEdgeFramework.ISEApplicationWindowEvents_Event; } }
+
+        /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISEAddIn.
         /// </summary>
         public SolidEdgeFramework.ISEAddIn AddIn { get { return _addInInstance as SolidEdgeFramework.ISEAddIn; } }
+
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEAddInEvents_Event;
+        /// </summary>
+        public SolidEdgeFramework.ISEAddInEvents_Event AddInEvents { get { return _addInInstance.AddInEvents as SolidEdgeFramework.ISEAddInEvents_Event; } }
 
         /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISEAddInEx.
@@ -316,19 +331,67 @@ namespace SolidEdge.Community.AddIn
         /// </remarks>
         public SolidEdgeFramework.ISEAddInEx AddInEx { get { return _addInInstance as SolidEdgeFramework.ISEAddInEx; } }
 
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISolidEdgeBar.
+        /// </summary>
         public SolidEdgeFramework.ISolidEdgeBar EdgeBar { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBar; } }
 
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISolidEdgeBarEx.
+        /// </summary>
         public SolidEdgeFramework.ISolidEdgeBarEx EdgeBarEx { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBarEx; } }
 
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISolidEdgeBarEx2.
+        /// </summary>
         public SolidEdgeFramework.ISolidEdgeBarEx2 EdgeBarEx2 { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBarEx2; } }
 
+        /// <summary>
+        /// Returns an instance of EdgeBarController.
+        /// </summary>
         public EdgeBarController EdgeBarController { get { return _edgeBarController; } }
+
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEFeatureLibraryEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEFeatureLibraryEvents_Event FeatureLibraryEvents { get { return _application.FeatureLibraryEvents as SolidEdgeFramework.ISEFeatureLibraryEvents_Event; } }
+
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEFileUIEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEFileUIEvents_Event FileUIEvents { get { return _application.FileUIEvents as SolidEdgeFramework.ISEFileUIEvents_Event; } }
+
+        /// <summary>
+        /// Returns a global static instance of the addin.
+        /// </summary>
+        public static SolidEdgeAddIn Instance { get { return _instance; } }
 
         bool IsDefaultAppDomain { get { return AppDomain.CurrentDomain.IsDefaultAppDomain(); } }
         bool IsIsolatedAppDomain { get { return !AppDomain.CurrentDomain.IsDefaultAppDomain(); } }
 
-        public OverlayController OverlayController { get { return _overlayController; } }
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISENewFileUIEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISENewFileUIEvents_Event NewFileUIEvents { get { return _application.NewFileUIEvents as SolidEdgeFramework.ISENewFileUIEvents_Event; } }
 
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEECEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEECEvents_Event SEECEvents { get { return _application.SEECEvents as SolidEdgeFramework.ISEECEvents_Event; } }
+
+        /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEShortCutMenuEvents_Event.
+        /// </summary>
+        public SolidEdgeFramework.ISEShortCutMenuEvents_Event ShortcutMenuEvents { get { return _application.ShortcutMenuEvents as SolidEdgeFramework.ISEShortCutMenuEvents_Event; } }
+
+        /// <summary>
+        /// Returns an instance of the ViewOverlayController.
+        /// </summary>
+        public ViewOverlayController ViewOverlayController { get { return _viewOverlayController; } }
+
+        /// <summary>
+        /// Returns an instance of RibbonController.
+        /// </summary>
         public RibbonController RibbonController { get { return _ribbonController; } }
 
         #endregion

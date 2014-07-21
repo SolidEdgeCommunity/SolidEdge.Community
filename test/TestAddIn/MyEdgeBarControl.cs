@@ -11,10 +11,6 @@ using System.Windows.Forms;
 
 namespace TestAddIn
 {
-    [EdgeBarPage(EdgeBarPageDocumentTypes.Assembly, 1)]
-    [EdgeBarPage(EdgeBarPageDocumentTypes.Draft, 2)]
-    [EdgeBarPage(EdgeBarPageDocumentTypes.Part, 3)]
-    [EdgeBarPage(EdgeBarPageDocumentTypes.SheetMetal, 4)]
     public partial class MyEdgeBarControl : EdgeBarControl
     {
         public MyEdgeBarControl()

@@ -5,23 +5,32 @@ using System.Text;
 
 namespace SolidEdge.Community.AddIn
 {
-    public sealed class OverlayController : IDisposable
+    /// <summary>
+    /// View overlay controller class.
+    /// </summary>
+    public sealed class ViewOverlayController : IDisposable
     {
-        private List<Overlay> _overlays = new List<Overlay>();
+        private List<ViewOverlay> _overlays = new List<ViewOverlay>();
         private bool _disposed = false;
 
-        internal OverlayController()
+        internal ViewOverlayController()
         {
         }
 
-        ~OverlayController()
+        /// <summary>
+        /// Destructor.
+        /// </summary>
+        ~ViewOverlayController()
         {
             Dispose(false);
         }
 
         #region Methods
 
-        public void Add(SolidEdgeFramework.View view, Overlay overlay)
+        /// <summary>
+        /// Adds an overlay to the specified view.
+        /// </summary>
+        public void Add(SolidEdgeFramework.View view, ViewOverlay overlay)
         {
             if (view == null) throw new ArgumentNullException("view");
             if (overlay == null) throw new ArgumentNullException("overlay");
@@ -36,36 +45,74 @@ namespace SolidEdge.Community.AddIn
             _overlays.Add(overlay);
         }
 
-        public void Add(SolidEdgeFramework.Window window, Overlay overlay)
+        /// <summary>
+        /// Adds an overlay to the specified window.
+        /// </summary>
+        public void Add(SolidEdgeFramework.Window window, ViewOverlay overlay)
         {
             if (window == null) throw new ArgumentNullException("window");
             Add(window.View, overlay);
         }
 
-        public void Add<TOverlay>(SolidEdgeFramework.View view) where TOverlay : Overlay
+        /// <summary>
+        /// Adds an overlay to the specified view.
+        /// </summary>
+        public TOverlay Add<TOverlay>(SolidEdgeFramework.View view) where TOverlay : ViewOverlay
         {
             TOverlay overlay = Activator.CreateInstance<TOverlay>();
             Add(view, overlay);
+            return overlay;
         }
 
-        public void Add<TOverlay>(SolidEdgeFramework.Window window) where TOverlay : Overlay
+        /// <summary>
+        /// Adds an overlay to the specified window.
+        /// </summary>
+        public TOverlay Add<TOverlay>(SolidEdgeFramework.Window window) where TOverlay : ViewOverlay
         {
             TOverlay overlay = Activator.CreateInstance<TOverlay>();
             Add(window, overlay);
+            return overlay;
         }
 
+        /// <summary>
+        /// Gets the overlay for the specified view.
+        /// </summary>
+        public ViewOverlay GetOverlay(SolidEdgeFramework.View view)
+        {
+            if (view == null) throw new ArgumentNullException("view");
+            return _overlays.Where(x => x.View.Equals(view)).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets the overlay for the specified window.
+        /// </summary>
+        public ViewOverlay GetOverlay(SolidEdgeFramework.Window window)
+        {
+            if (window == null) throw new ArgumentNullException("window");
+            return GetOverlay(window.View);
+        }
+
+        /// <summary>
+        /// Determines if the specified view has an overlay.
+        /// </summary>
         public bool HasOverlay(SolidEdgeFramework.View view)
         {
             return _overlays.Where(x => x.View.Equals(view)).FirstOrDefault() != null;
         }
 
+        /// <summary>
+        /// Determines if the specified window has an overlay.
+        /// </summary>
         public bool HasOverlay(SolidEdgeFramework.Window window)
         {
             if (window == null) throw new ArgumentNullException("window");
             return HasOverlay(window.View);
         }
 
-        public void Remove(Overlay overlay)
+        /// <summary>
+        /// Removes the specified overlay.
+        /// </summary>
+        public void Remove(ViewOverlay overlay)
         {
             if (overlay == null) throw new ArgumentNullException("overlay");
 
@@ -77,6 +124,9 @@ namespace SolidEdge.Community.AddIn
             overlay.Dispose();
         }
 
+        /// <summary>
+        /// Removes all overlays.
+        /// </summary>
         public void RemoveAll()
         {
             foreach (var overlay in _overlays)
@@ -85,6 +135,9 @@ namespace SolidEdge.Community.AddIn
             }
         }
 
+        /// <summary>
+        /// Removes all overlays for the specified window.
+        /// </summary>
         public void RemoveAll(SolidEdgeFramework.Window window)
         {
             if (window == null) throw new ArgumentNullException("window");
@@ -93,6 +146,9 @@ namespace SolidEdge.Community.AddIn
 
         }
 
+        /// <summary>
+        /// Removes all overlays for the specified view.
+        /// </summary>
         public void RemoveAll(SolidEdgeFramework.View view)
         {
             if (view == null) throw new ArgumentNullException("view");
@@ -110,7 +166,10 @@ namespace SolidEdge.Community.AddIn
 
         #region Properties
 
-        public IEnumerable<Overlay> Overlays { get { return _overlays.AsEnumerable(); } }
+        /// <summary>
+        /// Returns an IEnumerable of all overlays.
+        /// </summary>
+        public IEnumerable<ViewOverlay> Overlays { get { return _overlays.AsEnumerable(); } }
 
         #endregion
 

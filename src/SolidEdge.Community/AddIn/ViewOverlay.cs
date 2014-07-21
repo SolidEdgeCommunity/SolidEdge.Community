@@ -10,22 +10,22 @@ using System.Threading;
 
 namespace SolidEdge.Community.AddIn
 {
-    public abstract class Overlay :
+    public abstract class ViewOverlay :
         SolidEdgeFramework.ISEViewEvents,
         SolidEdgeFramework.ISEIGLDisplayEvents,
         SolidEdgeFramework.ISEhDCDisplayEvents,
         IDisposable
     {
         SolidEdgeFramework.View _view;
-        OverlayController _controller;
+        ViewOverlayController _controller;
         private Dictionary<IConnectionPoint, int> _connectionPointDictionary = new Dictionary<IConnectionPoint, int>();
         protected bool _disposed = false;
 
-        public Overlay()
+        public ViewOverlay()
         {
         }
 
-        ~Overlay()
+        ~ViewOverlay()
         {
             Dispose(false);
         }
@@ -109,14 +109,23 @@ namespace SolidEdge.Community.AddIn
 
         #region SolidEdgeFramework.ISEViewEvents virtual members
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEViewEvents.Changed event.
+        /// </summary>
         public virtual void Changed()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEViewEvents.Destroyed event.
+        /// </summary>
         public virtual void Destroyed()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEViewEvents.StyleChanged event.
+        /// </summary>
         public virtual void StyleChanged()
         {
         }
@@ -125,18 +134,30 @@ namespace SolidEdge.Community.AddIn
 
         #region SolidEdgeFramework.ISEIGLDisplayEvents virtual members
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEIGLDisplayEvents.BeginDisplay event.
+        /// </summary>
         public virtual void BeginOpenGLDisplay()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEIGLDisplayEvents.BeginIGLMainDisplay event.
+        /// </summary>
         public virtual void BeginOpenGLMainDisplay(SolidEdge.IGL gl)
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEIGLDisplayEvents.EndDisplay event.
+        /// </summary>
         public virtual void EndOpenGLDisplay()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEIGLDisplayEvents.EndIGLMainDisplay event.
+        /// </summary>
         public virtual void EndOpenGLMainDisplay(object pUnknownIGL)
         {
         }
@@ -145,18 +166,30 @@ namespace SolidEdge.Community.AddIn
 
         #region SolidEdgeFramework.ISEhDCDisplayEvents virtual members
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEhDCDisplayEvents.BeginDisplay event.
+        /// </summary>
         public virtual void BeginDeviceContextDisplay()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEhDCDisplayEvents.BeginhDCMainDisplay event.
+        /// </summary>
         public virtual void BeginDeviceContextMainDisplay(IntPtr hDC, ref double modelToDC, ref int rect)
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEhDCDisplayEvents.EndDisplay event.
+        /// </summary>
         public virtual void EndDeviceContextDisplay()
         {
         }
 
+        /// <summary>
+        /// Raised by the SolidEdgeFramework.ISEhDCDisplayEvents.EndhDCMainDisplay event.
+        /// </summary>
         public virtual void EndDeviceContextMainDisplay(IntPtr hDC, ref double modelToDC, ref int rect)
         {
         }
@@ -167,12 +200,15 @@ namespace SolidEdge.Community.AddIn
 
         public bool IsDisposed { get { return _disposed; } }
 
-        public OverlayController Controller
+        public ViewOverlayController Controller
         {
             get { return _controller; }
             internal set { _controller = value; }
         }
 
+        /// <summary>
+        /// The SolidEdgeFramework.View assigned to this overlay.
+        /// </summary>
         public SolidEdgeFramework.View View
         {
             get { return _view; }

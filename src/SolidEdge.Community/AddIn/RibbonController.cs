@@ -60,8 +60,8 @@ namespace SolidEdge.Community.AddIn
 
                 if (control != null)
                 {
-                    ribbon.OnControlClick(control);
                     control.DoClick();
+                    ribbon.OnControlClick(control);
                 }
             }
         }

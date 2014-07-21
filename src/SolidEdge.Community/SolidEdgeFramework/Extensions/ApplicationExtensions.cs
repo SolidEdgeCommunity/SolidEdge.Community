@@ -7,7 +7,10 @@ using System.Windows.Forms;
 
 namespace SolidEdgeFramework.Extensions
 {
-    public static partial class ApplicationExtensions
+    /// <summary>
+    /// SolidEdgeFramework.Application extension methods.
+    /// </summary>
+    public static class ApplicationExtensions
     {
         /// <summary>
         /// Returns the active document.

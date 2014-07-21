@@ -35,17 +35,15 @@ namespace TestAddIn
         void applicationEvents_AfterWindowActivate(object theWindow)
         {
             var window = (SolidEdgeFramework.Window)theWindow;
-            this.OverlayController.Add<MyViewOverlay>(window.View);
+            this.ViewOverlayController.Add<MyViewOverlay>(window.View);
         }
 
         public override void OnConnectToEnvironment(SolidEdgeFramework.Environment environment, bool firstTime)
         {
-            base.OnConnectToEnvironment(environment, firstTime);
         }
 
         public override void OnDisconnection(SolidEdgeFramework.SeDisconnectMode DisconnectMode)
         {
-            base.OnDisconnection(DisconnectMode);
         }
 
         public override void OnCreateRibbon(RibbonController controller, Guid environmentCategory, bool firstTime)

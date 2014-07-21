@@ -6,9 +6,9 @@ using System.Text;
 
 namespace TestAddIn
 {
-    [RibbonAttribute(SolidEdge.CATID.SEApplication)]
-    [RibbonAttribute(SolidEdge.CATID.SEPart)]
-    [RibbonAttribute(SolidEdge.CATID.SEDMPart)]
+    //[RibbonAttribute(SolidEdge.CATID.SEApplication)]
+    //[RibbonAttribute(SolidEdge.CATID.SEPart)]
+    //[RibbonAttribute(SolidEdge.CATID.SEDMPart)]
     public class MyRibbon : Ribbon
     {
         const string _embeddedResourceName = "TestAddIn.Ribbon.xml";

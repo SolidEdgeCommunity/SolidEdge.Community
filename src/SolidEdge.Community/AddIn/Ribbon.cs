@@ -121,6 +121,16 @@ namespace SolidEdge.Community.AddIn
                                 ribbonControl.ScreenTip = controlScreentip.Value;
                                 ribbonControl.SuperTip = controlSupertip.Value;
 
+                                if (controlMacro != null)
+                                {
+                                    ribbonControl.Macro = controlMacro.Value;
+                                }
+
+                                if (controlMacroParameters != null)
+                                {
+                                    ribbonControl.MacroParameters = controlMacroParameters.Value;
+                                }
+
                                 if (controlImageId != null)
                                 {
                                     ribbonControl.TryParseImageId(controlImageId.Value);
@@ -254,16 +264,16 @@ namespace SolidEdge.Community.AddIn
 
     }
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class RibbonAttribute : Attribute
-    {
-        private Guid _environmentCategory;
+    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    //public class RibbonAttribute : Attribute
+    //{
+    //    private Guid _environmentCategory;
 
-        public RibbonAttribute(string environmentCategory)
-        {
-            _environmentCategory = new Guid(environmentCategory);
-        }
+    //    public RibbonAttribute(string environmentCategory)
+    //    {
+    //        _environmentCategory = new Guid(environmentCategory);
+    //    }
 
-        public Guid EnvironmentCategory { get { return _environmentCategory; } }
-    }
+    //    public Guid EnvironmentCategory { get { return _environmentCategory; } }
+    //}
 }
