@@ -6,18 +6,18 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     public sealed class RibbonController : IDisposable,
         SolidEdgeFramework.ISEAddInEvents,
         SolidEdgeFramework.ISEAddInEventsEx
     {
-        private SolidEdge.Community.AddIn.SolidEdgeAddIn _addIn;
+        private SolidEdgeCommunity.AddIn.SolidEdgeAddIn _addIn;
         private List<Ribbon> _ribbons = new List<Ribbon>();
         private Dictionary<IConnectionPoint, int> _connectionPointDictionary = new Dictionary<IConnectionPoint, int>();
         private bool _disposed = false;
 
-        internal RibbonController(SolidEdge.Community.AddIn.SolidEdgeAddIn addIn)
+        internal RibbonController(SolidEdgeCommunity.AddIn.SolidEdgeAddIn addIn)
         {
             if (addIn == null) throw new ArgumentNullException("addIn");
             _addIn = addIn;

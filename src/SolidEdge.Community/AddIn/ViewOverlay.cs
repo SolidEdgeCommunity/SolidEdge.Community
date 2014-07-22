@@ -1,4 +1,4 @@
-﻿using SolidEdge.Community;
+﻿using SolidEdgeCommunity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     public abstract class ViewOverlay :
         SolidEdgeFramework.ISEViewEvents,

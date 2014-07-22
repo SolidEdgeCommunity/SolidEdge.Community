@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     /// <summary>
     /// Defines a resource file (.bmp | .png) to be embedded as a native Win32 resource at compile time.

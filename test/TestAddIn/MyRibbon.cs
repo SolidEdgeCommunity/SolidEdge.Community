@@ -1,4 +1,4 @@
-﻿using SolidEdge.Community.AddIn;
+﻿using SolidEdgeCommunity.AddIn;
 using System;
 using System.Collections.Generic;
 using System.Linq;

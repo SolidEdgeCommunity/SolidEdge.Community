@@ -1,5 +1,5 @@
 ﻿using SolidEdge;
-using SolidEdge.Community;
+using SolidEdgeCommunity;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace TestAddIn
 {
-    class MyViewOverlay : SolidEdge.Community.AddIn.ViewOverlay
+    class MyViewOverlay : SolidEdgeCommunity.AddIn.ViewOverlay
     {
         private BoundingBoxInfo _boundingBoxInfo = default(BoundingBoxInfo);
         private bool _showOpenGlBoxes = false;

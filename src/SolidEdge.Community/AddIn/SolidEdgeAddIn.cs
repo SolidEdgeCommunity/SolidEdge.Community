@@ -17,7 +17,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     public abstract class SolidEdgeAddIn : MarshalByRefObject, SolidEdgeFramework.ISolidEdgeAddIn
     {

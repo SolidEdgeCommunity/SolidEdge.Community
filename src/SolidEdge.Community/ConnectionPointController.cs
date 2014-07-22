@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 
-namespace SolidEdge.Community
+namespace SolidEdgeCommunity
 {
     /// <summary>
     /// Controller that handles connecting\disconnecting to COM events via IConnectionPointContainer and IConnectionPoint interfaces.

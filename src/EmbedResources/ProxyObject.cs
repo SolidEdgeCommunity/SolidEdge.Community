@@ -20,7 +20,7 @@ namespace EmbedResources
             var assembly = Assembly.LoadFrom(assemblyPath);
             var attributes = assembly
                 .GetCustomAttributes(false)
-                .Where(x => x.GetType().FullName.Equals("SolidEdge.Community.AddIn.NativeResourceAttribute"));
+                .Where(x => x.GetType().FullName.Equals("SolidEdgeCommunity.AddIn.NativeResourceAttribute"));
 
             foreach (dynamic attribute in attributes)
             {

@@ -18,8 +18,25 @@ namespace SolidEdgeFramework.Extensions
         /// <remarks>An exception will be thrown if there is no active document.</remarks>
         public static SolidEdgeFramework.SolidEdgeDocument GetActiveDocument(this SolidEdgeFramework.Application application)
         {
-            // ActiveDocument will throw an exception if no document is open.
-            return (SolidEdgeFramework.SolidEdgeDocument)application.ActiveDocument;
+            return application.GetActiveDocument(true);
+        }
+
+        /// <summary>
+        /// Returns the active document.
+        /// </summary>
+        public static SolidEdgeFramework.SolidEdgeDocument GetActiveDocument(this SolidEdgeFramework.Application application, bool throwOnError)
+        {
+            try
+            {
+                // ActiveDocument will throw an exception if no document is open.
+                return (SolidEdgeFramework.SolidEdgeDocument)application.ActiveDocument;
+            }
+            catch
+            {
+                if (throwOnError) throw;
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -29,8 +46,26 @@ namespace SolidEdgeFramework.Extensions
         /// /// <remarks>An exception will be thrown if there is no active document or if the cast fails.</remarks>
         public static T GetActiveDocument<T>(this SolidEdgeFramework.Application application) where T : class
         {
-            // ActiveDocument will throw an exception if no document is open.
-            return (T)application.ActiveDocument;
+            return application.GetActiveDocument<T>(true);
+        }
+
+        /// <summary>
+        /// Returns the active document.
+        /// </summary>
+        /// <typeparam name="T">The type to return.</typeparam>
+        public static T GetActiveDocument<T>(this SolidEdgeFramework.Application application, bool throwOnError) where T : class
+        {
+            try
+            {
+                // ActiveDocument will throw an exception if no document is open.
+                return (T)application.ActiveDocument;
+            }
+            catch
+            {
+                if (throwOnError) throw;
+            }
+
+            return null;
         }
 
         /// <summary>

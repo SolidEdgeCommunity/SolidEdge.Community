@@ -1,5 +1,4 @@
-﻿using SolidEdge.Community.AddIn;
-//using SolidEdgeFramework.Extensions;
+﻿using SolidEdgeCommunity.AddIn;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

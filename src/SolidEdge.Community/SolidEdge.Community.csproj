@@ -7,7 +7,7 @@
     <ProjectGuid>{0E7A7AE5-0D9D-4608-A959-FD0C90E06841}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolidEdge.Community</RootNamespace>
+    <RootNamespace>SolidEdgeCommunity</RootNamespace>
     <AssemblyName>SolidEdge.Community</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -66,6 +66,7 @@
     <Compile Include="OleMessageFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolidEdgeFramework\Extensions\MouseExtensions.cs" />
+    <Compile Include="SolidEdgeFramework\Extensions\SheetExtensions.cs" />
     <Compile Include="SolidEdgeInstall.cs" />
     <Compile Include="SolidEdgeFramework\Extensions\ApplicationExtensions.cs" />
     <Compile Include="SolidEdgeFramework\Extensions\DocumentsExtensions.cs" />

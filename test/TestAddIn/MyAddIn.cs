@@ -1,5 +1,5 @@
-﻿using SolidEdge.Community;
-using SolidEdge.Community.AddIn;
+﻿using SolidEdgeCommunity;
+using SolidEdgeCommunity.AddIn;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +16,7 @@ namespace TestAddIn
     [ComVisible(true)]
     [Guid("00000000-0000-0000-0000-C7823CD102E4")]
     [ProgId("SolidEdge.Community.TestAddIn.MyAddIn")]
-    public class MyAddIn : SolidEdge.Community.AddIn.SolidEdgeAddIn
+    public class MyAddIn : SolidEdgeCommunity.AddIn.SolidEdgeAddIn
     {
         public override void OnConnection(SolidEdgeFramework.Application application, SolidEdgeFramework.SeConnectMode ConnectMode, SolidEdgeFramework.AddIn AddInInstance)
         {
@@ -71,7 +71,7 @@ namespace TestAddIn
 
             try
             {
-                SolidEdge.Community.AddIn.SolidEdgeAddIn.Register(t, title, summary, environments);
+                MyAddIn.Register(t, title, summary, environments);
             }
             catch (System.Exception ex)
             {
@@ -82,7 +82,7 @@ namespace TestAddIn
         [ComUnregisterFunction]
         public static void OnUnregister(Type t)
         {
-            SolidEdge.Community.AddIn.SolidEdgeAddIn.Unregister(t);
+            MyAddIn.Unregister(t);
         }
 
         #endregion

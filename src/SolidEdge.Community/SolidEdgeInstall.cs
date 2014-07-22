@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SolidEdge.Community
+namespace SolidEdgeCommunity
 {
     /// <summary>
     /// Helper class for interaction with Solid Edge.

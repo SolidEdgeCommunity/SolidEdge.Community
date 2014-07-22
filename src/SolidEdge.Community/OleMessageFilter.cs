@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SolidEdge.Community
+namespace SolidEdgeCommunity
 {
     enum SERVERCALL
     {

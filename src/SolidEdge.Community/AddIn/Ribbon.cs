@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     public abstract class Ribbon : IDisposable
     {

@@ -5,7 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading;
 
-namespace SolidEdge.Community.AddIn
+namespace SolidEdgeCommunity.AddIn
 {
     /// <summary>
     /// EdgeBar controller class.
@@ -14,12 +14,12 @@ namespace SolidEdge.Community.AddIn
         SolidEdgeFramework.ISEAddInEdgeBarEvents,
         SolidEdgeFramework.ISEAddInEdgeBarEventsEx
     {
-        private SolidEdge.Community.AddIn.SolidEdgeAddIn _addIn;
+        private SolidEdgeCommunity.AddIn.SolidEdgeAddIn _addIn;
         private Dictionary<IConnectionPoint, int> _connectionPointDictionary = new Dictionary<IConnectionPoint, int>();
         private List<EdgeBarPage> _edgeBarPages = new List<EdgeBarPage>();
         private bool _disposed = false;
 
-        internal EdgeBarController(SolidEdge.Community.AddIn.SolidEdgeAddIn addIn)
+        internal EdgeBarController(SolidEdgeCommunity.AddIn.SolidEdgeAddIn addIn)
         {
             if (addIn == null) throw new ArgumentNullException("addIn");
             _addIn = addIn;
