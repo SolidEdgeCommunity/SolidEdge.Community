@@ -7,6 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbedResources", "src\Embed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAddIn", "test\TestAddIn\TestAddIn.csproj", "{FF8BF735-430C-4DE9-81FB-ABC1FA3DC8C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA", "test\QA\QA.csproj", "{DEC4DFE9-2824-4E4E-BB36-BD6F80D050C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7CFC6173-3882-4C10-BF25-AD117F526FEB}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +32,10 @@ Global
 		{FF8BF735-430C-4DE9-81FB-ABC1FA3DC8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF8BF735-430C-4DE9-81FB-ABC1FA3DC8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF8BF735-430C-4DE9-81FB-ABC1FA3DC8C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC4DFE9-2824-4E4E-BB36-BD6F80D050C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC4DFE9-2824-4E4E-BB36-BD6F80D050C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC4DFE9-2824-4E4E-BB36-BD6F80D050C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC4DFE9-2824-4E4E-BB36-BD6F80D050C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

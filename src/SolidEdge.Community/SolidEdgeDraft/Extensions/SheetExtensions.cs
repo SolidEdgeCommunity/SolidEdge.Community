@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SolidEdgeFramework.Extensions
+namespace SolidEdgeDraft.Extensions
 {
     public static class SheetExtensions
     {

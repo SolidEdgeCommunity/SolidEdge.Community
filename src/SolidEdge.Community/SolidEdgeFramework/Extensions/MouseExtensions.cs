@@ -5,6 +5,9 @@ using System.Text;
 
 namespace SolidEdgeFramework.Extensions
 {
+    /// <summary>
+    /// SolidEdgeFramework.Mouse extension methods.
+    /// </summary>
     public static class MouseExtensions
     {
         public static void AddToLocateFilter(this SolidEdgeFramework.Mouse mouse, SolidEdgeConstants.seLocateFilterConstants filter)

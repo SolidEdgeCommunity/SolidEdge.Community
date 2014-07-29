@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Added by Jason Newell -->
+  <Target Name="AfterBuild">
+    <PropertyGroup>
+      <ILRepackExe>..\..\packages\ILRepack.1.25.0\tools\ILRepack.exe</ILRepackExe>
+      <ILRepackSwitches>/targetplatform:v4 /parallel /wildcards /xmldocs /verbose /out:"$(TargetDir)ILRepack\$(TargetFileName)"</ILRepackSwitches>
+      <ILRepackArgs>$(TargetPath) $(TargetDir)Interop.SolidEdge.dll</ILRepackArgs>
+      <ILRepackCommand>$(ILRepackExe) $(ILRepackSwitches) $(ILRepackArgs)</ILRepackCommand>
+    </PropertyGroup>
+
+    <!-- Create ILRepack directory. -->
+    <MakeDir Directories="$(TargetDir)ILRepack"/>
+
+    <!--Execute ILRepack-->
+    <Message Text="Executing: $(ILRepackCommand)" Importance="High" />
+    <Exec Command="$(ILRepackCommand)"/>
+  </Target>
+</Project>
