@@ -1,31 +1,82 @@
 SolidEdge.Community Repostiory
 ================
-This is the central repository for the Solid Edge Community.
+This is the central repository for the [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) NuGet package.
 
 ---
 
-## [SolidEdge.Community NuGet Package](https://www.nuget.org/packages/SolidEdge.Community)
-SolidEdge.Community.dll is a single .NET 4.0 assembly that makes automating Solid Edge easy. The core feature of this assembly are [Extension Methods](http://msdn.microsoft.com/library/bb383977.aspx) to the base Solid Edge API. The assembly also has helper classes where needed.
-
-SolidEdge.Community.xml is also provided alongside the .dll and is the primary source of documentation.
-
-As part of the build process, [Interop.SolidEdge.dll](https://www.nuget.org/packages/Interop.SolidEdge) is merged into the assembly using [ILRepack](https://www.nuget.org/packages/ILRepack), thus removing the dependency on [Interop.SolidEdge.dll](https://www.nuget.org/packages/Interop.SolidEdge) and simplifying development\deployment. Note that all documentation from Interop.SolidEdge.dll is also merged.
+## Overview
+The core functionality of this package is the SolidEdge.Community.dll. This assembly extends the [Interop.SolidEdge](http://www.nuget.org/packages/Interop.SolidEdge) NuGet package and enhances the development experience. For examples of how to use the package, please download the latest release of [Samples for Solid Edge](https://solidedgesamples.codeplex.com/) on CodePlex.
 
 ---
 
-## [SolidEdge.Community.AddIn.Tools NuGet Package](https://www.nuget.org/packages/SolidEdge.Community.AddIn.Tools)
+## Installation via Nuget Package Manager
+The [Nuget Package Manager](http://docs.nuget.org/docs/start-here/managing-nuget-packages-using-the-dialog) provides a GUI interface for interacting with NuGet. Note that the steps will vary depending on your version of Visual Studio.
 
-This NuGet package does not contain any assemblies but does depends on the [SolidEdge.Community NuGet Package](https://www.nuget.org/packages/SolidEdge.Community) which will automatically get installed when you install this package.
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Install.png)
 
-For example usage, please download and review the AddInDemo project available at the [Samples for Solid Edge on CodePlex](https://solidedgesamples.codeplex.com).
+## Installation via Nuget Package Manager Console
+The [Nuget Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console) provides a command line style interface for interacting with NuGet. Note that the steps will vary depending on your version of Visual Studio.
 
-### MSBUILD custom task
-This package installs a MSBUILD custom task named SolidEdge.Community.AddIn.Tools.targets into your project. Upon the AfterBuild event, an executable named EmbedResources.exe will scan your assembly for native Win32 resources and embed them into your assembly. The reason this is necessary is because the Solid Edge AddIn API only allows Win32 resources. This requirement does not work well with .NET projects so the executable was created to aide in the process.
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/InstallCommandLine.png)
 
-### Package Manager Console
-This package installs a PowerShell script named SolidEdgeAddIn.psm1. This script adds two console commands that aide in registering\unregistering your addin.  You can control the registration of your addin with Solid Edge directly inside Visual Studio. Navigate to Tools -> NuGet Package Manager -> Package Manager Console. 
+You can also install a specific version of the package by appending the version to the command.
 
-* **Register-SolidEdgeAddIn** - Registers the addin for Solid Edge x86 and Solid Edge  x64 on the development machine.
-* **Unregister-SolidEdgeAddIn** - Unregisters the addin for Solid Edge x86 and Solid Edge x64 on the development machine.
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/InstallCommandLineVersion.png)
 
 ---
+
+## Extension Methods
+[Extension methods](http://msdn.microsoft.com/library/bb383977.aspx) make working with the Solid Edge API much easier. These are community provided methods that extend the base Solid Edge API.
+
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/ExtensionMethods.png)
+
+**C# Syntax**
+
+    // The following statement enables all SolidEdgeCommunity extension methods.
+    using SolidEdgeCommunity.Extensions;
+    
+or
+    
+    // Extension methods can also be called directly.
+    SolidEdgeCommunity.Extensions.ApplicationExtensions.StartCommand(application, SolidEdgeConstants.PartCommandConstants.PartEditCopy);
+
+**Visual Basic Syntax**
+
+    ' The following statement enables all SolidEdgeCommunity extension methods.
+    Imports SolidEdgeCommunity.Extensions
+
+or
+
+    ' Extension methods can also be called directly.
+    SolidEdgeCommunity.Extensions.ApplicationExtensions.StartCommand(objApplication, SolidEdgeConstants.PartCommandConstants.PartEditCopy)
+    
+### Intellisense
+When extension methods are enabled, they will appear next to the standard APIs. They have **different icons** and are marked **(extension)** in their description.
+
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/ExtensionMethodIntellisense.png)
+
+---
+
+## NuGet Package Manager Console Commands
+The [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) package imports a PowerShell script named SolidEdge.Community.psm1 into your project on startup. This script adds several console commands that aide in Solid Edge development.  To access the console inside Visual Studio. Navigate to Tools -> NuGet Package Manager -> Package Manager Console. 
+
+### Register-SolidEdgeAddIn
+Registers the addin for Solid Edge x86 and Solid Edge  x64 on the development machine.
+
+### Unregister-SolidEdgeAddIn
+Unregisters the addin for Solid Edge x86 and Solid Edge x64 on the development machine.
+
+### Enable-SolidEdgeCommunityBuildTarget
+Modifies your project to include a custom [MSBuild target](http://msdn.microsoft.com/library/ms171462.aspx). Currently, the build target will execute EmbedNativeResources.exe against your assembly during the **AfterBuild** event. As the executable name implies, it will embed native Win32 resources into your assembly after building the project. Native Win32 resources are necessary when you want to show custom images in Solid Edge.
+    
+### Disable-SolidEdgeCommunityBuildTarget
+Modifies your project and removes the custom [MSBuild target](http://msdn.microsoft.com/library/ms171462.aspx) added by a previous Enable-SolidEdgeCommunityBuildTarget command.
+
+### Install-SolidEdgeAddInRibbonSchema
+Adds a Ribbon.xsd to your project. This XSD contains definitions that validate any user created Ribbon XML. The validation happens real-time in Visual Studio. If you later decide that you do not want the XSD, simply delete it from your project.
+
+### Start-SolidEdge
+Starts a new instance of Solid Edge and makes it visible to the user.
+
+### Stop-SolidEdge
+Stops a running instance of Solid Edge.
