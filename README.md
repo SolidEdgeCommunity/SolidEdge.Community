@@ -15,7 +15,7 @@ The [Nuget Package Manager](http://docs.nuget.org/docs/start-here/managing-nuget
 ![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Install.png)
 
 ## Installation via Nuget Package Manager Console
-The [Nuget Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console) provides a command line style interface for interacting with NuGet. Note that the steps will vary depending on your version of Visual Studio.
+The [Nuget Package Manager Console](http://docs.nuget.org/docs/start-here/using-the-package-manager-console) provides a command line style interface for interacting with NuGet.
 
 ![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/InstallCommandLine.png)
 
