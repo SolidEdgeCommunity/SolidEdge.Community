@@ -1,6 +1,6 @@
 SolidEdge.Community Repostiory
 ================
-This is the central repository for the [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) NuGet package.
+This is the central repository for the [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) NuGet package. See the [SolidEdge.Community Wiki](https://github.com/SolidEdgeCommunity/SolidEdge.Community/wiki) for more information.
 
 ---
 
