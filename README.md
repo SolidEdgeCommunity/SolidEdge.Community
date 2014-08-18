@@ -63,17 +63,27 @@ The [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) pac
 ### Register-SolidEdgeAddIn
 Registers the addin for Solid Edge x86 and Solid Edge  x64 on the development machine.
 
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Register-SolidEdgeAddIn.png)
+
 ### Unregister-SolidEdgeAddIn
 Unregisters the addin for Solid Edge x86 and Solid Edge x64 on the development machine.
 
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Unregister-SolidEdgeAddIn.png)
+
 ### Enable-SolidEdgeCommunityBuildTarget
 Modifies your project to include a custom [MSBuild target](http://msdn.microsoft.com/library/ms171462.aspx). Currently, the build target will execute EmbedNativeResources.exe against your assembly during the **AfterBuild** event. As the executable name implies, it will embed native Win32 resources into your assembly after building the project. Native Win32 resources are necessary when you want to show custom images in Solid Edge.
-    
+
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Enable-SolidEdgeCommunityBuildTarget.png)
+
 ### Disable-SolidEdgeCommunityBuildTarget
 Modifies your project and removes the custom [MSBuild target](http://msdn.microsoft.com/library/ms171462.aspx) added by a previous Enable-SolidEdgeCommunityBuildTarget command.
 
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Disable-SolidEdgeCommunityBuildTarget.png)
+
 ### Install-SolidEdgeAddInRibbonSchema
 Adds a Ribbon.xsd to your project. This XSD contains definitions that validate any user created Ribbon XML. The validation happens real-time in Visual Studio. If you later decide that you do not want the XSD, simply delete it from your project.
+
+![](https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/Install-SolidEdgeAddInRibbonSchema.png)
 
 ### Start-SolidEdge
 Starts a new instance of Solid Edge and makes it visible to the user.
