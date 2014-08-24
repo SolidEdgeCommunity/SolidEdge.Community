@@ -8,6 +8,9 @@ using System.Threading;
 
 namespace SolidEdgeCommunity.AddIn
 {
+    /// <summary>
+    /// Controller class for working with ribbons.
+    /// </summary>
     public sealed class RibbonController : IDisposable,
         SolidEdgeFramework.ISEAddInEvents,
         SolidEdgeFramework.ISEAddInEventsEx
@@ -23,6 +26,9 @@ namespace SolidEdgeCommunity.AddIn
             _addIn = addIn;
         }
 
+        /// <summary>
+        /// Destructor
+        /// </summary>
         ~RibbonController()
         {
             Dispose(false);
@@ -125,17 +131,35 @@ namespace SolidEdgeCommunity.AddIn
 
         #region Methods
 
+        /// <summary>
+        /// Adds a ribbon to the specified environment.
+        /// </summary>
+        /// <typeparam name="TRibbon"></typeparam>
+        /// <param name="environmentCategory"></param>
+        /// <param name="firstTime"></param>
         public void Add<TRibbon>(Guid environmentCategory, bool firstTime) where TRibbon : Ribbon
         {
             TRibbon ribbon = Activator.CreateInstance<TRibbon>();
+
             Add(ribbon, environmentCategory, firstTime);
         }
 
+        /// <summary>
+        /// Adds a ribbon to the specified environment.
+        /// </summary>
+        /// <param name="ribbon"></param>
+        /// <param name="environmentCategory"></param>
+        /// <param name="firstTime"></param>
         public void Add(Ribbon ribbon, Guid environmentCategory, bool firstTime)
         {
             if (ribbon == null) throw new ArgumentNullException("ribbon");
 
+            // Solid Edge ST or higher.
             var addInEx = _addIn.AddInEx;
+
+            // Solid Edge ST7 or higher.
+            var addInEx2 = _addIn.AddInEx2;
+
             var EnvironmentCatID = environmentCategory.ToString("B");
 
             ribbon.EnvironmentCategory = environmentCategory;
@@ -166,38 +190,82 @@ namespace SolidEdgeCommunity.AddIn
                 {
                     foreach (var control in group.Controls)
                     {
-                        // Allocate command arrays. Please see the addin.doc in the SDK folder for details.
-                        Array commandNames = new string[] { control.ToCommandName() };
-                        Array commandIDs = new int[] { control.CommandId };
+                        // Properly format the command bar name string.
+                        string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
 
-                        addInEx.SetAddInInfoEx(
-                            _addIn.NativeResourcesDllPath,
-                            EnvironmentCatID,
-                            tab.Name,
-                            control.ImageId,
-                            -1,
-                            -1,
-                            -1,
-                            commandNames.Length,
-                            ref commandNames,
-                            ref commandIDs);
+                        // Properly format the command name string.
+                        StringBuilder commandName = new StringBuilder();
 
-                        control.SolidEdgeCommandId = (int)commandIDs.GetValue(0);
+                        // Note: The command will not be added if it the name is not unique!
+                        commandName.AppendFormat("{0}_{1}", _addIn.Guid.ToString(), control.CommandId);
 
-                        if (firstTime)
+                        // Now append the description, tooltip, etc separated by \n.
+                        commandName.AppendFormat("\n{0}\n{1}\n{2}", control.Label, control.SuperTip, control.ScreenTip);
+
+                        // Append macro info if provided.
+                        if (!String.IsNullOrEmpty(control.Macro))
                         {
-                            // Properly format the command bar name string.
-                            string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
+                            commandName.AppendFormat("\n{0}", control.Macro);
 
-                            // Add the command bar button.
-                            SolidEdgeFramework.CommandBarButton pButton = addInEx.AddCommandBarButton(EnvironmentCatID, commandBarName, control.CommandId);
-
-                            // Set the button style.
-                            if (pButton != null)
+                            if (!String.IsNullOrEmpty(control.MacroParameters))
                             {
-                                pButton.Style = control.Style;
+                                commandName.AppendFormat("\n{0}", control.MacroParameters);
                             }
                         }
+
+                        // Assign the control's CommandName property. Mostly just for reference.
+                        control.CommandName = commandName.ToString();
+
+                        // Allocate command arrays. Please see the addin.doc in the SDK folder for details.
+                        Array commandNames = new string[] { control.CommandName };
+                        Array commandIDs = new int[] { control.CommandId };
+                        Array commandButtonStyles = new SolidEdgeFramework.SeButtonStyle[] { control.Style };
+
+                        if (addInEx2 != null)
+                        {
+                            // ST7 or higher.
+                            addInEx2.SetAddInInfoEx2(
+                                _addIn.NativeResourcesDllPath,
+                                EnvironmentCatID,
+                                commandBarName,
+                                control.ImageId,
+                                -1,
+                                -1,
+                                -1,
+                                commandNames.Length,
+                                ref commandNames,
+                                ref commandIDs,
+                                ref commandButtonStyles);
+                        }
+                        else if (addInEx != null)
+                        {
+                            // ST or higher
+                            addInEx.SetAddInInfoEx(
+                                _addIn.NativeResourcesDllPath,
+                                EnvironmentCatID,
+                                commandBarName,
+                                control.ImageId,
+                                -1,
+                                -1,
+                                -1,
+                                commandNames.Length,
+                                ref commandNames,
+                                ref commandIDs);
+
+                            if (firstTime)
+                            {
+                                // Add the command bar button.
+                                SolidEdgeFramework.CommandBarButton pButton = addInEx.AddCommandBarButton(EnvironmentCatID, commandBarName, control.CommandId);
+
+                                // Set the button style.
+                                if (pButton != null)
+                                {
+                                    pButton.Style = control.Style;
+                                }
+                            }
+                        }
+
+                        control.SolidEdgeCommandId = (int)commandIDs.GetValue(0);
                     }
                 }
             }
@@ -209,6 +277,9 @@ namespace SolidEdgeCommunity.AddIn
 
         #region Properties
 
+        /// <summary>
+        /// Returns the ribbon for the current environment.
+        /// </summary>
         public Ribbon ActiveRibbon
         {
             get
@@ -221,12 +292,18 @@ namespace SolidEdgeCommunity.AddIn
             }
         }
 
+        /// <summary>
+        /// Returns an enumerable collection of ribbons.
+        /// </summary>
         public IEnumerable<Ribbon> Ribbons { get { return _ribbons.AsEnumerable(); } }
 
         #endregion
 
         #region IDisposable implementation
 
+        /// <summary>
+        /// Disposes resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

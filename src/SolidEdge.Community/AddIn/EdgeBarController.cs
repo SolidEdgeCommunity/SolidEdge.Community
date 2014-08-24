@@ -26,8 +26,11 @@ namespace SolidEdgeCommunity.AddIn
 
             AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEvents>(_addIn.AddInEx);
             AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEventsEx>(_addIn.AddInEx);
-        }        
+        }
 
+        /// <summary>
+        /// Destructor
+        /// </summary>
         ~EdgeBarController()
         {
             Dispose(false);
@@ -128,6 +131,9 @@ namespace SolidEdgeCommunity.AddIn
 
         #region Properties
 
+        /// <summary>
+        /// Enumerable collection of EdgeBarPage objects.
+        /// </summary>
         public IEnumerable<EdgeBarPage> EdgeBarPages { get { return _edgeBarPages.AsEnumerable(); } }
 
         #endregion

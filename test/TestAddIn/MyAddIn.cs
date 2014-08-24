@@ -65,8 +65,8 @@ namespace TestAddIn
             string summary = "Solid Edge Addin in .NET 4.0.";
 
             Guid[] environments = {
-                                        SolidEdge.CATID.SEApplicationGuid,
-                                        SolidEdge.CATID.SEAllDocumentEnvrionmentsGuid
+                                      SolidEdgeSDK.EnvironmentCategories.Application,
+                                      SolidEdgeSDK.EnvironmentCategories.AllDocumentEnvrionments
                                     };
 
             try

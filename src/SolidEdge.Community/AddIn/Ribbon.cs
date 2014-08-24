@@ -9,20 +9,19 @@ using System.Xml.Linq;
 
 namespace SolidEdgeCommunity.AddIn
 {
+    /// <summary>
+    /// Abstract base class for ribbon.
+    /// </summary>
     public abstract class Ribbon : IDisposable
     {
         //private int _lastCommandId;
         private Guid _environmentCategory;
         private List<RibbonTab> _tabs = new List<RibbonTab>();
 
-        public Ribbon()
-        {
-        }
-
         #region Methods
 
         /// <summary>
-        /// Adds a new tab.
+        /// Adds a new ribbon tab.
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
@@ -33,21 +32,42 @@ namespace SolidEdgeCommunity.AddIn
             return ribbonTab;
         }
 
+        /// <summary>
+        /// Returns a button by id.
+        /// </summary>
+        /// <param name="commandId"></param>
+        /// <returns></returns>
         public RibbonButton GetButton(int commandId)
         {
             return Buttons.Where(x => x.CommandId == commandId).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns a checkbox by id.
+        /// </summary>
+        /// <param name="commandId"></param>
+        /// <returns></returns>
         public RibbonCheckBox GetCheckBox(int commandId)
         {
             return CheckBoxes.Where(x => x.CommandId == commandId).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns a RibbonControl by id.
+        /// </summary>
+        /// <typeparam name="TRibbonControl"></typeparam>
+        /// <param name="commandId"></param>
+        /// <returns></returns>
         public TRibbonControl GetControl<TRibbonControl>(int commandId) where TRibbonControl : RibbonControl
         {
             return Controls.OfType<TRibbonControl>().Where(x => x.CommandId == commandId).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Returns a radio button by id.
+        /// </summary>
+        /// <param name="commandId"></param>
+        /// <returns></returns>
         public RibbonRadioButton GetRadioButton(int commandId)
         {
             return RadioButtons.Where(x => x.CommandId == commandId).FirstOrDefault();
@@ -232,6 +252,11 @@ namespace SolidEdgeCommunity.AddIn
             internal set { _environmentCategory = value; }
         }
 
+        /// <summary>
+        /// Returns a RibbonControl by id.
+        /// </summary>
+        /// <param name="commandId"></param>
+        /// <returns></returns>
         public RibbonControl this[int commandId]
         {
             get
@@ -240,10 +265,17 @@ namespace SolidEdgeCommunity.AddIn
             }
         }
 
+        /// <summary>
+        /// Returns an enumerable collection of ribbon tabs.
+        /// </summary>
         public IEnumerable<RibbonTab> Tabs { get { return _tabs.AsEnumerable(); } }
 
         #endregion
 
+        /// <summary>
+        /// Called when a user clicks a ribbon control.
+        /// </summary>
+        /// <param name="control"></param>
         public virtual void OnControlClick(RibbonControl control)
         {
         }
@@ -263,17 +295,4 @@ namespace SolidEdgeCommunity.AddIn
         #endregion
 
     }
-
-    //[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    //public class RibbonAttribute : Attribute
-    //{
-    //    private Guid _environmentCategory;
-
-    //    public RibbonAttribute(string environmentCategory)
-    //    {
-    //        _environmentCategory = new Guid(environmentCategory);
-    //    }
-
-    //    public Guid EnvironmentCategory { get { return _environmentCategory; } }
-    //}
 }

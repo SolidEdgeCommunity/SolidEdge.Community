@@ -31,9 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.SolidEdge, Version=106.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Interop.SolidEdge, Version=107.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Interop.SolidEdge.106.9.0\lib\net40\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\..\packages\Interop.SolidEdge.107.0.1\lib\net40\Interop.SolidEdge.dll</HintPath>
     </Reference>
     <Reference Include="SharpGL">
       <HintPath>..\..\packages\SharpGLCore.2.3.0.1\lib\net40\SharpGL.dll</HintPath>
@@ -119,7 +119,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"..\..\..\..\src\EmbedResources\bin\Debug\EmbedResources.exe" $(ProjectDir) $(TargetPath)</PostBuildEvent>
+    <PostBuildEvent>"..\..\..\..\src\EmbedNativeResources\bin\Debug\EmbedNativeResources.exe" $(ProjectDir) $(TargetPath)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

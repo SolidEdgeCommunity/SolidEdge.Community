@@ -64,7 +64,7 @@ namespace SolidEdgeCommunity.AddIn
         {
             if (_disposed) return;
 
-            BeginOpenGLMainDisplay(pUnknownIGL as SolidEdge.IGL);
+            BeginOpenGLMainDisplay(pUnknownIGL as SolidEdgeSDK.IGL);
         }
 
         void SolidEdgeFramework.ISEIGLDisplayEvents.EndDisplay()
@@ -78,7 +78,7 @@ namespace SolidEdgeCommunity.AddIn
         {
             if (_disposed) return;
 
-            EndOpenGLMainDisplay(pUnknownIGL as SolidEdge.IGL);
+            EndOpenGLMainDisplay(pUnknownIGL as SolidEdgeSDK.IGL);
         }
 
         #endregion
@@ -144,7 +144,7 @@ namespace SolidEdgeCommunity.AddIn
         /// <summary>
         /// Raised by the SolidEdgeFramework.ISEIGLDisplayEvents.BeginIGLMainDisplay event.
         /// </summary>
-        public virtual void BeginOpenGLMainDisplay(SolidEdge.IGL gl)
+        public virtual void BeginOpenGLMainDisplay(SolidEdgeSDK.IGL gl)
         {
         }
 

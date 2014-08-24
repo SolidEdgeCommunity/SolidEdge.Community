@@ -218,12 +218,13 @@ namespace SolidEdgeCommunity.AddIn
 
         private void InitializeIsolatedAddIn()
         {
+            var type = this.GetType();
+
             AppDomainSetup appDomainSetup = AppDomain.CurrentDomain.SetupInformation;
             Evidence evidence = AppDomain.CurrentDomain.Evidence;
-            appDomainSetup.ApplicationBase = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            appDomainSetup.ApplicationBase = Path.GetDirectoryName(type.Assembly.Location);
 
-            Type type = this.GetType();
-            string domainName = "AddInAppDomain";
+            string domainName = this.AddIn.GUID;
             _isolatedDomain = AppDomain.CreateDomain(domainName, evidence, appDomainSetup);
             var proxyAddIn = _isolatedDomain.CreateInstanceAndUnwrap(type.Assembly.FullName, type.FullName);
             _isolatedAddIn = (SolidEdgeFramework.ISolidEdgeAddIn)proxyAddIn;
@@ -332,6 +333,14 @@ namespace SolidEdgeCommunity.AddIn
         public SolidEdgeFramework.ISEAddInEx AddInEx { get { return _addInInstance as SolidEdgeFramework.ISEAddInEx; } }
 
         /// <summary>
+        /// Returns an instance of SolidEdgeFramework.ISEAddIn.
+        /// </summary>
+        /// <remarks>
+        /// ISEAddInEx is available in Solid Edge ST7 or newer.
+        /// </remarks>
+        public SolidEdgeFramework.ISEAddInEx2 AddInEx2 { get { return _addInInstance as SolidEdgeFramework.ISEAddInEx2; } }
+
+        /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISolidEdgeBar.
         /// </summary>
         public SolidEdgeFramework.ISolidEdgeBar EdgeBar { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBar; } }
@@ -360,6 +369,16 @@ namespace SolidEdgeCommunity.AddIn
         /// Returns an instance of SolidEdgeFramework.ISEFileUIEvents_Event.
         /// </summary>
         public SolidEdgeFramework.ISEFileUIEvents_Event FileUIEvents { get { return _application.FileUIEvents as SolidEdgeFramework.ISEFileUIEvents_Event; } }
+
+        /// <summary>
+        /// Returns the GUID of the AddIn.
+        /// </summary>
+        public Guid Guid { get { return new Guid(_addInInstance.GUID); } }
+
+        /// <summary>
+        /// Returns the version of the GUI for the AddIn.
+        /// </summary>
+        public int GuiVersion { get { return _addInInstance.GuiVersion; } }
 
         /// <summary>
         /// Returns a global static instance of the addin.
@@ -496,7 +515,8 @@ namespace SolidEdgeCommunity.AddIn
         {
             using (RegistryKey baseKey = CreateBaseKey(t.GUID))
             {
-                var subkey = String.Format(@"Implemented Categories\{0}", SolidEdge.CATID.SolidEdgeAddInGuid.ToRegistryString());
+                var guid = new Guid(SolidEdgeSDK.CATID.SolidEdgeAddIn);
+                var subkey = String.Format(@"Implemented Categories\{0}", guid.ToRegistryString());
 
                 using (RegistryKey implementedCategoriesKey = baseKey.CreateSubKey(subkey))
                 {

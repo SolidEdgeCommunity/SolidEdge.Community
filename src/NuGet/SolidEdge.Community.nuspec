@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>SolidEdge.Community</id>
+        <version>107.0.1</version>
+        <title>SolidEdge.Community</title>
+        <authors>Jason Newell</authors>
+        <owners>Jason Newell</owners>
+        <licenseUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community/blob/master/LICENSE.md</licenseUrl>
+        <projectUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Community provided package for automating Solid Edge. Refer to the project page for functionality details.</description>
+        <summary>Community provided package for automating Solid Edge. Refer to the project page for functionality details.</summary>
+        <releaseNotes>Updated to Solid Edge ST7. Fixed issue with isolated appdomain.</releaseNotes>
+        <language>en-US</language>
+        <tags>interop solidedge community contrib</tags>
+        <dependencies>
+            <dependency id="Interop.SolidEdge" version="107.0.1" />
+        </dependencies>
+    </metadata>
+</package>

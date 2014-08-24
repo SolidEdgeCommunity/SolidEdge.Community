@@ -1,5 +1,4 @@
-﻿using SolidEdge;
-using SolidEdgeCommunity;
+﻿using SolidEdgeCommunity;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -24,7 +23,7 @@ namespace TestAddIn
             _boundingBoxInfo.LineWidth = 2f;
         }
 
-        public override void BeginOpenGLMainDisplay(IGL gl)
+        public override void BeginOpenGLMainDisplay(SolidEdgeSDK.IGL gl)
         {
             if (gl == null) return;
 
@@ -129,7 +128,7 @@ namespace TestAddIn
             }
         }
 
-        private void DrawBoundingBox(IGL gl)
+        private void DrawBoundingBox(SolidEdgeSDK.IGL gl)
         {
             if (_boundingBoxInfo.Visible == false) return;
 
@@ -196,7 +195,7 @@ namespace TestAddIn
             }
         }
 
-        private void DrawCube(SolidEdge.IGL gl, float fSize)
+        private void DrawCube(SolidEdgeSDK.IGL gl, float fSize)
         {
             float[][] p0 = new float[][] 
             {

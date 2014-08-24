@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Added by Jason Newell -->
+  <!-- This file is not currently being referenced but left for future reference. -->
   <Target Name="AfterBuild">
     <PropertyGroup>
       <ILRepackExe>..\..\packages\ILRepack.1.25.0\tools\ILRepack.exe</ILRepackExe>

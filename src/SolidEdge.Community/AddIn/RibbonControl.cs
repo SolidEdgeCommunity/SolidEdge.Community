@@ -11,13 +11,24 @@ namespace SolidEdgeCommunity.AddIn
     [Serializable]
     public delegate void RibbonControlHelpEventHandler(RibbonControl control, IntPtr hWndFrame, int helpCommandID);
 
+    /// <summary>
+    /// Abstract base class for all ribbon controls.
+    /// </summary>
     public abstract class RibbonControl
     {
+        /// <summary>
+        /// Raised when a user clicks the control.
+        /// </summary>
         public event RibbonControlClickEventHandler Click;
+
+        /// <summary>
+        /// Raised when user requests help for the control.
+        /// </summary>
         public event RibbonControlHelpEventHandler Help;
 
         private bool _checked = false;
         private int _commandId = -1;
+        private string _commandName;
         private bool _enabled = true;
         private RibbonGroup _group;
         private int _imageId = -1;
@@ -51,6 +62,11 @@ namespace SolidEdgeCommunity.AddIn
         /// This is the command id used by OnCommand SolidEdgeFramework.AddInEvents.
         /// </remarks>
         public int CommandId { get { return _commandId; } }
+
+        /// <summary>
+        /// Returns the generated command name used when calling SetAddInInfo().
+        /// </summary>
+        public string CommandName { get { return _commandName; } internal set { _commandName = value; } }
 
         /// <summary>
         /// Gets or set a value indicating whether the control is enabled.
@@ -136,7 +152,17 @@ namespace SolidEdgeCommunity.AddIn
 
         internal void TryParseEnabled(string enabled)
         {
-            if (bool.TryParse(enabled, out _enabled) == false) { _enabled = true; }
+            int iEnabled = 1;
+
+            if (bool.TryParse(enabled, out _enabled))
+            {
+                // Case: true\false
+            }
+            else if (int.TryParse(enabled, out iEnabled))
+            {
+                // Case 1\0
+                _enabled = iEnabled == 1 ? true : false;
+            }
         }
 
         internal void TryParseImageId(string imageId)
@@ -176,30 +202,36 @@ namespace SolidEdgeCommunity.AddIn
 
         #endregion
 
-        /// <summary>
-        /// Properly formats the CommandName to be used in the CommandNames array of SetAddInInfoEx().
-        /// </summary>
-        internal string ToCommandName()
-        {
-            StringBuilder sb = new StringBuilder();
+    //    /// <summary>
+    //    /// Properly formats the CommandName to be used in the CommandNames array of SetAddInInfoEx().
+    //    /// </summary>
+    //    internal string ToCommandName()
+    //    {
+    //        StringBuilder sb = new StringBuilder();
 
-            sb.AppendFormat("{0}\n{1}\n{2}\n{3}", CommandId, Label, SuperTip, ScreenTip);
+    //        var guid = Guid.NewGuid();
+    //        var prefix = String.Format("{0}_{1}", guid.ToString().Substring(0, 5), CommandId);
 
-            // Append macro info if provided.
-            if (!String.IsNullOrEmpty(Macro))
-            {
-                sb.AppendFormat("\n{0}", Macro);
+    //        sb.AppendFormat("{0}\n{1}\n{2}\n{3}", prefix, Label, SuperTip, ScreenTip);
 
-                if (!String.IsNullOrEmpty(MacroParameters))
-                {
-                    sb.AppendFormat("\n{0}", MacroParameters);
-                }
-            }
+    //        // Append macro info if provided.
+    //        if (!String.IsNullOrEmpty(Macro))
+    //        {
+    //            sb.AppendFormat("\n{0}", Macro);
 
-            return sb.ToString();
-        }
+    //            if (!String.IsNullOrEmpty(MacroParameters))
+    //            {
+    //                sb.AppendFormat("\n{0}", MacroParameters);
+    //            }
+    //        }
+
+    //        return sb.ToString();
+    //    }
     }
 
+    /// <summary>
+    /// Ribbon button control class.
+    /// </summary>
     public class RibbonButton : RibbonControl
     {
         private RibbonButtonSize _size = RibbonButtonSize.Normal;
@@ -217,6 +249,9 @@ namespace SolidEdgeCommunity.AddIn
             }
         }
 
+        /// <summary>
+        /// Gets or sets the size of the control.
+        /// </summary>
         public RibbonButtonSize Size
         {
             get { return _size; }
@@ -224,7 +259,7 @@ namespace SolidEdgeCommunity.AddIn
         }
 
         /// <summary>
-        /// 
+        /// Returns the control style.
         /// </summary>
         internal override SolidEdgeFramework.SeButtonStyle Style
         {
@@ -262,6 +297,9 @@ namespace SolidEdgeCommunity.AddIn
         }
     }
 
+    /// <summary>
+    /// Ribbon checkbox control class.
+    /// </summary>
     public class RibbonCheckBox : RibbonControl
     {
         internal RibbonCheckBox(int id)
@@ -293,6 +331,9 @@ namespace SolidEdgeCommunity.AddIn
         }
     }
 
+    /// <summary>
+    /// Ribbon radio button control class.
+    /// </summary>
     public class RibbonRadioButton : RibbonControl
     {
         internal RibbonRadioButton(int id)
@@ -311,9 +352,19 @@ namespace SolidEdgeCommunity.AddIn
         internal override SolidEdgeFramework.SeButtonStyle Style { get { return SolidEdgeFramework.SeButtonStyle.seRadioButton; } }
     }
 
+    /// <summary>
+    /// Ribbon button sizes.
+    /// </summary>
     public enum RibbonButtonSize
     {
+        /// <summary>
+        /// Standard size button.
+        /// </summary>
         Normal,
+
+        /// <summary>
+        /// Large size button.
+        /// </summary>
         Large
     }
 }
