@@ -21,8 +21,8 @@ namespace TestAddIn
 
             this.LoadXml(assembly, "TestAddIn.Ribbon.xml");
 
-            _buttonOpenGlBoxes = GetButton(21);
-            _buttonOpenGlBoxes.Click += _buttonOpenGlBoxes_Click;
+            //_buttonOpenGlBoxes = GetButton(21);
+            //_buttonOpenGlBoxes.Click += _buttonOpenGlBoxes_Click;
         }
 
         void _buttonOpenGlBoxes_Click(RibbonControl control)

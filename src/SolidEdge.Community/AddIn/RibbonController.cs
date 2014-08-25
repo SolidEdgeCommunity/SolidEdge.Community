@@ -158,7 +158,8 @@ namespace SolidEdgeCommunity.AddIn
             var addInEx = _addIn.AddInEx;
 
             // Solid Edge ST7 or higher.
-            var addInEx2 = _addIn.AddInEx2;
+            var addInEx2 = (SolidEdgeFramework.ISEAddInEx2)null;
+            //var addInEx2 = _addIn.AddInEx2;
 
             var EnvironmentCatID = environmentCategory.ToString("B");
 
@@ -223,6 +224,9 @@ namespace SolidEdgeCommunity.AddIn
 
                         if (addInEx2 != null)
                         {
+                            // Currently having an issue with SetAddInInfoEx2() in that the commandButtonStyles don't seem to apply.
+                            // Need to investigate further. For now, addInEx2 is set to null.
+
                             // ST7 or higher.
                             addInEx2.SetAddInInfoEx2(
                                 _addIn.NativeResourcesDllPath,
