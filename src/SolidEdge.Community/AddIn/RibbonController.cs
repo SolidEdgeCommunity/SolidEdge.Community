@@ -192,7 +192,8 @@ namespace SolidEdgeCommunity.AddIn
                     foreach (var control in group.Controls)
                     {
                         // Properly format the command bar name string.
-                        string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
+                        //string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
+                        string commandBarName = tab.Name;
 
                         // Properly format the command name string.
                         StringBuilder commandName = new StringBuilder();
