@@ -413,6 +413,20 @@ namespace SolidEdgeCommunity.AddIn
         /// </summary>
         public RibbonController RibbonController { get { return _ribbonController; } }
 
+
+        int _majorVersion = 0;
+        public int MajorVersion
+        {
+            get
+            {
+                if (_majorVersion == 0)
+                {
+                    _majorVersion = int.Parse(_application.Version.Substring(0, 3));
+                }
+                return _majorVersion;
+            }
+        }
+
         #endregion
 
         #region regasm.exe functions

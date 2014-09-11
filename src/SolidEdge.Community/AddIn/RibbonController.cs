@@ -19,7 +19,7 @@ namespace SolidEdgeCommunity.AddIn
         private List<Ribbon> _ribbons = new List<Ribbon>();
         private Dictionary<IConnectionPoint, int> _connectionPointDictionary = new Dictionary<IConnectionPoint, int>();
         private bool _disposed = false;
-
+        
         internal RibbonController(SolidEdgeCommunity.AddIn.SolidEdgeAddIn addIn)
         {
             if (addIn == null) throw new ArgumentNullException("addIn");
@@ -38,18 +38,68 @@ namespace SolidEdgeCommunity.AddIn
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommand(int CommandID)
         {
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommand(CommandID);
+            var ribbon = ActiveRibbon;
+
+            if (ribbon != null)
+            {
+                var control = ribbon.Controls.Where(x => x.CommandId == CommandID).FirstOrDefault();
+
+                if (control != null)
+                {
+                    control.DoClick();
+                    ribbon.OnControlClick(control);
+                }
+            }
         }
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommandHelp(int hFrameWnd, int HelpCommandID, int CommandID)
         {
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommandHelp(hFrameWnd, HelpCommandID, CommandID);
+            var ribbon = ActiveRibbon;
+
+            if (ribbon != null)
+            {
+                var control = ribbon.Controls.Where(x => x.CommandId == CommandID).FirstOrDefault();
+
+                if (control != null)
+                {
+                    control.DoHelp(new IntPtr(hFrameWnd), HelpCommandID);
+                }
+            }
         }
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommandUpdateUI(int CommandID, ref int CommandFlags, out string MenuItemText, ref int BitmapID)
         {
             MenuItemText = null;
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommandUpdateUI(CommandID, ref CommandFlags, out MenuItemText, ref BitmapID);
+            var ribbon = ActiveRibbon;
+            var flags = default(SolidEdgeConstants.SECommandActivation);
+
+            if (ribbon != null)
+            {
+                var control = ribbon.Controls.Where(x => x.CommandId == CommandID).FirstOrDefault();
+
+                if (control != null)
+                {
+                    if (control.Enabled)
+                    {
+                        flags |= SolidEdgeConstants.SECommandActivation.seCmdActive_Enabled;
+                    }
+
+                    if (control.Checked)
+                    {
+                        flags |= SolidEdgeConstants.SECommandActivation.seCmdActive_Checked;
+                    }
+
+                    if (control.UseDotMark)
+                    {
+                        flags |= SolidEdgeConstants.SECommandActivation.seCmdActive_UseDotMark;
+                    }
+
+                    flags |= SolidEdgeConstants.SECommandActivation.seCmdActive_ChangeText;
+                    MenuItemText = control.Label;
+
+                    CommandFlags = (int)flags;
+                }
+            }
         }
 
         #endregion
@@ -96,7 +146,7 @@ namespace SolidEdgeCommunity.AddIn
         {
             MenuItemText = null;
             var ribbon = ActiveRibbon;
-            var flags = default(SolidEdgeConstants.SECommandActivation); ;
+            var flags = default(SolidEdgeConstants.SECommandActivation);
 
             if (ribbon != null)
             {
@@ -170,10 +220,15 @@ namespace SolidEdgeCommunity.AddIn
                 AdviseSink<SolidEdgeFramework.ISEAddInEvents>(addInEx);
             }
 
-            if (IsSinkAdvised<SolidEdgeFramework.ISEAddInEventsEx>(addInEx) == false)
+            if (_addIn.MajorVersion > 105)
             {
-                AdviseSink<SolidEdgeFramework.ISEAddInEventsEx>(addInEx);
+                //not available in ST5 and earlier...
+                if (IsSinkAdvised<SolidEdgeFramework.ISEAddInEventsEx>(addInEx) == false)
+                {
+                    AdviseSink<SolidEdgeFramework.ISEAddInEventsEx>(addInEx);
+                }
             }
+
 
             if (_ribbons.Exists(x => x.EnvironmentCategory.Equals(ribbon.EnvironmentCategory)))
             {
@@ -184,7 +239,7 @@ namespace SolidEdgeCommunity.AddIn
             {
                 throw new System.Exception(String.Format("{0} is not a valid environment category.", ribbon.EnvironmentCategory));
             }
-
+                        
             foreach (var tab in ribbon.Tabs)
             {
                 foreach (var group in tab.Groups)
@@ -192,8 +247,7 @@ namespace SolidEdgeCommunity.AddIn
                     foreach (var control in group.Controls)
                     {
                         // Properly format the command bar name string.
-                        //string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
-                        string commandBarName = tab.Name;
+                        string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
 
                         // Properly format the command name string.
                         StringBuilder commandName = new StringBuilder();
@@ -232,7 +286,7 @@ namespace SolidEdgeCommunity.AddIn
                             addInEx2.SetAddInInfoEx2(
                                 _addIn.NativeResourcesDllPath,
                                 EnvironmentCatID,
-                                commandBarName,
+                                tab.Name,
                                 control.ImageId,
                                 -1,
                                 -1,
@@ -248,7 +302,7 @@ namespace SolidEdgeCommunity.AddIn
                             addInEx.SetAddInInfoEx(
                                 _addIn.NativeResourcesDllPath,
                                 EnvironmentCatID,
-                                commandBarName,
+                                tab.Name,
                                 control.ImageId,
                                 -1,
                                 -1,
