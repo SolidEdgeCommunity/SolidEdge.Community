@@ -16,6 +16,7 @@ using System.Threading;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
+using SolidEdgeCommunity.Extensions;
 
 namespace SolidEdgeCommunity.AddIn
 {
@@ -35,6 +36,7 @@ namespace SolidEdgeCommunity.AddIn
         /// </summary>
         public SolidEdgeAddIn()
         {
+            
             AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
         }
 
@@ -46,6 +48,9 @@ namespace SolidEdgeCommunity.AddIn
             {
                 _application = (SolidEdgeFramework.Application)Application;
                 _addInInstance = AddInInstance;
+
+                MajorVersion = _application.GetVersion().Major;
+
 
                 // Notice that "\n" is prepended to the description. This allows the addin to have its own Ribbon Tabs.
                 this.AddInEx.Description = String.Format("\n{0}", this.AddInEx.Description);
@@ -414,17 +419,10 @@ namespace SolidEdgeCommunity.AddIn
         public RibbonController RibbonController { get { return _ribbonController; } }
 
 
-        int _majorVersion = 0;
         public int MajorVersion
         {
-            get
-            {
-                if (_majorVersion == 0)
-                {
-                    _majorVersion = int.Parse(_application.Version.Substring(0, 3));
-                }
-                return _majorVersion;
-            }
+            get;
+            private set;
         }
 
         #endregion
