@@ -13,6 +13,16 @@ namespace SolidEdgeCommunity.Extensions
     public static class ApplicationExtensions
     {
         /// <summary>
+        /// Creates a Solid Edge command control.
+        /// </summary>
+        /// <param name="application"></param>
+        /// <param name="CmdFlags"></param>
+        public static SolidEdgeFramework.Command CreateCommand(this SolidEdgeFramework.Application application, SolidEdgeConstants.seCmdFlag CmdFlags)
+        {
+            return application.CreateCommand((int)CmdFlags);
+        }
+
+        /// <summary>
         /// Returns the currently active document.
         /// </summary>
         /// <remarks>An exception will be thrown if there is no active document.</remarks>

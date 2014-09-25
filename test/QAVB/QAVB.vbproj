@@ -106,7 +106,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\SolidEdge.Community\SolidEdge.Community.csproj">
+    <ProjectReference Include="..\..\src\SolidEdge.Community\SolidEdge.Community.csproj">
       <Project>{0e7a7ae5-0d9d-4608-a959-fd0c90e06841}</Project>
       <Name>SolidEdge.Community</Name>
     </ProjectReference>

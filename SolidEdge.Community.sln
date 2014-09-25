@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7CFC61
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmbedNativeResources", "src\EmbedNativeResources\EmbedNativeResources.csproj", "{7C0C237E-933F-4428-889B-BBCDBC2958AC}"
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QAVB", "QAVB\QAVB.vbproj", "{FC916040-2346-4B6D-99C7-3AE0A0C7B8DA}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "QAVB", "test\QAVB\QAVB.vbproj", "{FC916040-2346-4B6D-99C7-3AE0A0C7B8DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
