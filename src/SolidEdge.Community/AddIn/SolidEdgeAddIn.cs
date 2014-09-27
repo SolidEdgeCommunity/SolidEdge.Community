@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using SolidEdgeCommunity.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -327,17 +328,13 @@ namespace SolidEdgeCommunity.AddIn
         /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISEAddInEx.
         /// </summary>
-        /// <remarks>
-        /// ISEAddInEx is available in Solid Edge ST or newer.
-        /// </remarks>
+        /// <remarks>Available in Solid Edge V20 or greater.</remarks>
         public SolidEdgeFramework.ISEAddInEx AddInEx { get { return _addInInstance as SolidEdgeFramework.ISEAddInEx; } }
 
         /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISEAddIn.
         /// </summary>
-        /// <remarks>
-        /// ISEAddInEx is available in Solid Edge ST7 or newer.
-        /// </remarks>
+        /// <remarks>Available in Solid Edge ST7 or greater.</remarks>
         public SolidEdgeFramework.ISEAddInEx2 AddInEx2 { get { return _addInInstance as SolidEdgeFramework.ISEAddInEx2; } }
 
         /// <summary>
@@ -348,11 +345,13 @@ namespace SolidEdgeCommunity.AddIn
         /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISolidEdgeBarEx.
         /// </summary>
+        /// <remarks>Available in Solid Edge V20 or greater.</remarks>
         public SolidEdgeFramework.ISolidEdgeBarEx EdgeBarEx { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBarEx; } }
 
         /// <summary>
         /// Returns an instance of SolidEdgeFramework.ISolidEdgeBarEx2.
         /// </summary>
+        /// <remarks>Available in Solid Edge ST6 or greater.</remarks>
         public SolidEdgeFramework.ISolidEdgeBarEx2 EdgeBarEx2 { get { return _addInInstance as SolidEdgeFramework.ISolidEdgeBarEx2; } }
 
         /// <summary>
@@ -402,6 +401,11 @@ namespace SolidEdgeCommunity.AddIn
         /// Returns an instance of SolidEdgeFramework.ISEShortCutMenuEvents_Event.
         /// </summary>
         public SolidEdgeFramework.ISEShortCutMenuEvents_Event ShortcutMenuEvents { get { return _application.ShortcutMenuEvents as SolidEdgeFramework.ISEShortCutMenuEvents_Event; } }
+
+        /// <summary>
+        /// Returns the Solid Edge application version.
+        /// </summary>
+        public Version SolidEdgeVersion { get { return _application.GetVersion(); } }
 
         /// <summary>
         /// Returns an instance of the ViewOverlayController.

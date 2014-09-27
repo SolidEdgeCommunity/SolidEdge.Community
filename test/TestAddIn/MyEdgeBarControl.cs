@@ -1,4 +1,5 @@
-﻿using SolidEdgeCommunity.AddIn;
+﻿using SolidEdgeCommunity.Extensions;
+using SolidEdgeCommunity.AddIn;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -32,7 +33,7 @@ namespace TestAddIn
             var document = this.Document;
 
             var application = document.Application;
-            //this.richTextBox1.Text = application.GetGlobalParameter<string>(SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalSystemInfo);
+            this.richTextBox1.Text = application.GetGlobalParameter<string>(SolidEdgeFramework.ApplicationGlobalConstants.seApplicationGlobalSystemInfo);
         }
 
     }

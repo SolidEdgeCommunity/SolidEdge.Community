@@ -25,6 +25,10 @@ namespace TestAddIn
             //_buttonOpenGlBoxes.Click += _buttonOpenGlBoxes_Click;
         }
 
+        public override void OnControlClick(RibbonControl control)
+        {
+        }
+
         void _buttonOpenGlBoxes_Click(RibbonControl control)
         {
         }

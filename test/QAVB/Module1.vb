@@ -4,9 +4,9 @@ Imports SolidEdgeCommunity.Extensions
 Module Module1
 
     Sub Main()
-        Dim objApplication As SolidEdgeFramework.Application
+        'Dim objApplication As SolidEdgeFramework.Application
 
-        SolidEdgeCommunity.Extensions.ApplicationExtensions.StartCommand(objApplication, SolidEdgeConstants.PartCommandConstants.PartEditCopy)
+        'SolidEdgeCommunity.Extensions.ApplicationExtensions.StartCommand(objApplication, SolidEdgeConstants.PartCommandConstants.PartEditCopy)
     End Sub
 
 End Module

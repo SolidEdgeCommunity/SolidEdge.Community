@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidEdgeCommunity.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,6 +25,17 @@ namespace SolidEdgeCommunity.AddIn
         {
             if (addIn == null) throw new ArgumentNullException("addIn");
             _addIn = addIn;
+
+            if (_addIn.SolidEdgeVersion.Major <= 105)
+            {
+                // Solid Edge ST5 or lower.
+                AdviseSink<SolidEdgeFramework.ISEAddInEvents>(_addIn.AddInEx);
+            }
+            else
+            {
+                // Solid Edge ST6 or higher.
+                AdviseSink<SolidEdgeFramework.ISEAddInEventsEx>(_addIn.AddInEx);
+            }
         }
 
         /// <summary>
@@ -38,18 +50,21 @@ namespace SolidEdgeCommunity.AddIn
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommand(int CommandID)
         {
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommand(CommandID);
+            // Forward call to ISEAddInEventsEx implementation.
+            ((SolidEdgeFramework.ISEAddInEventsEx)this).OnCommand(CommandID);
         }
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommandHelp(int hFrameWnd, int HelpCommandID, int CommandID)
         {
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommandHelp(hFrameWnd, HelpCommandID, CommandID);
+            // Forward call to ISEAddInEventsEx implementation.
+            ((SolidEdgeFramework.ISEAddInEventsEx)this).OnCommandHelp(hFrameWnd, HelpCommandID, CommandID);
         }
 
         void SolidEdgeFramework.ISEAddInEvents.OnCommandUpdateUI(int CommandID, ref int CommandFlags, out string MenuItemText, ref int BitmapID)
         {
+            // Forward call to ISEAddInEventsEx implementation.
             MenuItemText = null;
-            //((SolidEdgeFramework.ISEAddInEvents)this).OnCommandUpdateUI(CommandID, ref CommandFlags, out MenuItemText, ref BitmapID);
+            ((SolidEdgeFramework.ISEAddInEventsEx)this).OnCommandUpdateUI(CommandID, ref CommandFlags, out MenuItemText, ref BitmapID);
         }
 
         #endregion
@@ -165,16 +180,6 @@ namespace SolidEdgeCommunity.AddIn
 
             ribbon.EnvironmentCategory = environmentCategory;
 
-            if (IsSinkAdvised<SolidEdgeFramework.ISEAddInEvents>(addInEx) == false)
-            {
-                AdviseSink<SolidEdgeFramework.ISEAddInEvents>(addInEx);
-            }
-
-            if (IsSinkAdvised<SolidEdgeFramework.ISEAddInEventsEx>(addInEx) == false)
-            {
-                AdviseSink<SolidEdgeFramework.ISEAddInEventsEx>(addInEx);
-            }
-
             if (_ribbons.Exists(x => x.EnvironmentCategory.Equals(ribbon.EnvironmentCategory)))
             {
                 throw new System.Exception(String.Format("A ribbon has already been added for environment category {0}.", ribbon.EnvironmentCategory));
@@ -192,7 +197,7 @@ namespace SolidEdgeCommunity.AddIn
                     foreach (var control in group.Controls)
                     {
                         // Properly format the command bar name string.
-                        string commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
+                        var categoryName = tab.Name;
 
                         // Properly format the command name string.
                         StringBuilder commandName = new StringBuilder();
@@ -220,18 +225,20 @@ namespace SolidEdgeCommunity.AddIn
                         // Allocate command arrays. Please see the addin.doc in the SDK folder for details.
                         Array commandNames = new string[] { control.CommandName };
                         Array commandIDs = new int[] { control.CommandId };
-                        Array commandButtonStyles = new SolidEdgeFramework.SeButtonStyle[] { control.Style };
 
                         if (addInEx2 != null)
                         {
                             // Currently having an issue with SetAddInInfoEx2() in that the commandButtonStyles don't seem to apply.
                             // Need to investigate further. For now, addInEx2 is set to null.
 
+                            categoryName = String.Format("{0}\n{1}", tab.Name, group.Name);
+                            Array commandButtonStyles = new SolidEdgeFramework.SeButtonStyle[] { control.Style };
+
                             // ST7 or higher.
                             addInEx2.SetAddInInfoEx2(
                                 _addIn.NativeResourcesDllPath,
                                 EnvironmentCatID,
-                                commandBarName,
+                                categoryName,
                                 control.ImageId,
                                 -1,
                                 -1,
@@ -247,7 +254,7 @@ namespace SolidEdgeCommunity.AddIn
                             addInEx.SetAddInInfoEx(
                                 _addIn.NativeResourcesDllPath,
                                 EnvironmentCatID,
-                                commandBarName,
+                                categoryName,
                                 control.ImageId,
                                 -1,
                                 -1,
@@ -258,6 +265,8 @@ namespace SolidEdgeCommunity.AddIn
 
                             if (firstTime)
                             {
+                                var commandBarName = String.Format("{0}\n{1}", tab.Name, group.Name);
+
                                 // Add the command bar button.
                                 SolidEdgeFramework.CommandBarButton pButton = addInEx.AddCommandBarButton(EnvironmentCatID, commandBarName, control.CommandId);
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SolidEdgeCommunity.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
@@ -24,8 +25,16 @@ namespace SolidEdgeCommunity.AddIn
             if (addIn == null) throw new ArgumentNullException("addIn");
             _addIn = addIn;
 
-            AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEvents>(_addIn.AddInEx);
-            AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEventsEx>(_addIn.AddInEx);
+            if (_addIn.SolidEdgeVersion.Major <= 105)
+            {
+                // Solid Edge ST5 or lower.
+                AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEvents>(_addIn.AddInEx);
+            }
+            else
+            {
+                // Solid Edge ST6 or higher.
+                AdviseSink<SolidEdgeFramework.ISEAddInEdgeBarEventsEx>(_addIn.AddInEx);
+            }
         }
 
         /// <summary>
@@ -40,16 +49,19 @@ namespace SolidEdgeCommunity.AddIn
 
         void SolidEdgeFramework.ISEAddInEdgeBarEvents.AddPage(object theDocument)
         {
+            // Forward call to ISEAddInEdgeBarEventsEx implementation.
             ((SolidEdgeFramework.ISEAddInEdgeBarEventsEx)this).AddPage(theDocument);
         }
 
         void SolidEdgeFramework.ISEAddInEdgeBarEvents.IsPageDisplayable(object theDocument, string EnvironmentCatID, out bool vbIsPageDisplayable)
         {
+            // Forward call to ISEAddInEdgeBarEventsEx implementation.
             ((SolidEdgeFramework.ISEAddInEdgeBarEventsEx)this).IsPageDisplayable(theDocument, EnvironmentCatID, out vbIsPageDisplayable);
         }
 
         void SolidEdgeFramework.ISEAddInEdgeBarEvents.RemovePage(object theDocument)
         {
+            // Forward call to ISEAddInEdgeBarEventsEx implementation.
             ((SolidEdgeFramework.ISEAddInEdgeBarEventsEx)this).RemovePage(theDocument);
         }
 
@@ -112,9 +124,18 @@ namespace SolidEdgeCommunity.AddIn
             if (control == null) throw new ArgumentNullException("control");
 
             var options = (int)SolidEdgeConstants.EdgeBarConstant.DONOT_MAKE_ACTIVE;
-            var hWnd = _addIn.EdgeBarEx2.AddPageEx(document, _addIn.NativeResourcesDllPath, imageId, control.ToolTip, options);
+            int hWnd = 0;
 
-            if (hWnd.Equals(IntPtr.Zero) == false)
+            if (_addIn.EdgeBarEx2 != null)
+            {
+                hWnd = _addIn.EdgeBarEx2.AddPageEx(document, _addIn.NativeResourcesDllPath, imageId, control.ToolTip, options);
+            }
+            else if (_addIn.EdgeBarEx != null)
+            {
+                hWnd = _addIn.EdgeBarEx.AddPageEx(document, _addIn.NativeResourcesDllPath, imageId, control.ToolTip, options);
+            }
+
+            if (hWnd != 0)
             {
                 var edgeBarPage = new EdgeBarPage(hWnd, document, control);
                 _edgeBarPages.Add(edgeBarPage);
