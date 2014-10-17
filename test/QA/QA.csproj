@@ -36,8 +36,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Interop.SolidEdge.107.1.0\lib\net40\Interop.SolidEdge.dll</HintPath>
     </Reference>
+    <Reference Include="SolidEdge.Community.Reader, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\SolidEdge.Community.Reader.1.4.0\lib\net40\SolidEdge.Community.Reader.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
