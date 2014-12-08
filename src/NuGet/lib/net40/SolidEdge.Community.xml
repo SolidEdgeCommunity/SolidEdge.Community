@@ -69,6 +69,11 @@
             <param name="id">Unique resource ID.</param>
             <param name="path">Path to resource file (.bmp | .png) relative to project.</param>
         </member>
+        <member name="T:SolidEdgeCommunity.AddIn.RegistrationSettings">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:SolidEdgeCommunity.AddIn.ViewOverlay.Changed">
             <summary>
             Raised by the SolidEdgeFramework.ISEViewEvents.Changed event.
@@ -584,6 +589,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SolidEdgeCommunity.AddIn.SolidEdgeAddIn.Register(SolidEdgeCommunity.AddIn.RegistrationSettings)">
+            <summary>
+            Registers the addin.
+            </summary>
+            <param name="settings"></param>
+        </member>
         <member name="M:SolidEdgeCommunity.AddIn.SolidEdgeAddIn.Register(System.Type,System.String,System.String,System.Guid[])">
             <summary>
             Registers the addin.
@@ -614,7 +625,7 @@
             <param name="t"></param>
             <param name="environments"></param>
         </member>
-        <member name="M:SolidEdgeCommunity.AddIn.SolidEdgeAddIn.RegisterImplementedCategories(System.Type)">
+        <member name="M:SolidEdgeCommunity.AddIn.SolidEdgeAddIn.RegisterImplementedCategories(System.Type,System.Guid[])">
             <summary>
             Registers the implemented categories of the addin.
             </summary>

@@ -424,22 +424,63 @@ namespace SolidEdgeCommunity.AddIn
         /// <summary>
         /// Registers the addin.
         /// </summary>
-        protected static void Register(Type t, string title, string summary, Guid[] environments)
+        /// <param name="settings"></param>
+        protected static void Register(RegistrationSettings settings)
         {
-            Register(t, title, summary, true, environments);
+            var type = settings.Type;
+            var assembly = type.Assembly;
+
+            #region HKEY_CLASSES_ROOT\CLSID\{GUID}
+
+            RegisterImplementedCategories(type, settings.ImplementedCategories);
+            RegisterOptions(type, settings.Enabled);
+
+            #endregion
+
+            #region HKEY_CLASSES_ROOT\CLSID\{GUID}\Environment Categories
+
+            RegisterEnvironments(type, settings.Environments.ToArray());
+
+            #endregion
+
+            #region HKEY_CLASSES_ROOT\CLSID\{GUID}\Summary
+
+            var culture = CultureInfo.CurrentCulture;
+
+            foreach (var title in settings.Titles)
+            {
+                RegisterTitle(type, title.Key, title.Value);
+            }
+
+            foreach (var summary in settings.Summaries)
+            {
+                RegisterSummary(type, summary.Key, summary.Value);
+            }
+
+            #endregion
         }
 
         /// <summary>
         /// Registers the addin.
         /// </summary>
-        protected static void Register(Type t, string title, string summary, bool enabled, Guid[] environments)
+        protected static void Register(Type type, string title, string summary, Guid[] environments)
         {
-            var assembly = t.Assembly;
+            Register(type, title, summary, true, environments);
+        }
+
+        /// <summary>
+        /// Registers the addin.
+        /// </summary>
+        protected static void Register(Type type, string title, string summary, bool enabled, Guid[] environments)
+        {
+            var assembly = type.Assembly;
 
             #region HKEY_CLASSES_ROOT\CLSID\{GUID}
 
-            RegisterImplementedCategories(t);
-            RegisterOptions(t, enabled);
+            Guid[] categoryGuids = { new Guid(SolidEdgeSDK.CATID.SolidEdgeAddIn) };
+
+            RegisterImplementedCategories(type, categoryGuids);
+            RegisterOptions(type, enabled);
 
             #endregion
 
@@ -456,7 +497,7 @@ namespace SolidEdgeCommunity.AddIn
             //    }
             //}
 
-            RegisterEnvironments(t, environments);
+            RegisterEnvironments(type, environments);
 
             #endregion
 
@@ -464,8 +505,8 @@ namespace SolidEdgeCommunity.AddIn
 
             var culture = CultureInfo.CurrentCulture;
 
-            RegisterTitle(t, culture, title);
-            RegisterSummary(t, culture, summary);
+            RegisterTitle(type, culture, title);
+            RegisterSummary(type, culture, summary);
 
             #endregion
         }
@@ -515,15 +556,17 @@ namespace SolidEdgeCommunity.AddIn
         /// Registers the implemented categories of the addin.
         /// </summary>
         /// <param name="t"></param>
-        static void RegisterImplementedCategories(Type t)
+        static void RegisterImplementedCategories(Type t, Guid[] categoryGuids)
         {
             using (RegistryKey baseKey = CreateBaseKey(t.GUID))
             {
-                var guid = new Guid(SolidEdgeSDK.CATID.SolidEdgeAddIn);
-                var subkey = String.Format(@"Implemented Categories\{0}", guid.ToRegistryString());
-
-                using (RegistryKey implementedCategoriesKey = baseKey.CreateSubKey(subkey))
+                foreach (var categoryGuid in categoryGuids)
                 {
+                    var subkey = String.Format(@"Implemented Categories\{0}", categoryGuid.ToRegistryString());
+
+                    using (RegistryKey implementedCategoriesKey = baseKey.CreateSubKey(subkey))
+                    {
+                    }
                 }
             }
         }
