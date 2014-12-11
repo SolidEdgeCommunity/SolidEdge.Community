@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>SolidEdge.Community</id>
-        <version>107.2.0</version>
+        <version>107.2.1</version>
         <title>SolidEdge.Community</title>
         <authors>Jason Newell</authors>
         <owners>Jason Newell</owners>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Community provided package for automating Solid Edge. Refer to the project page for functionality details.</description>
         <summary>Community provided package for automating Solid Edge. Refer to the project page for functionality details.</summary>
-        <releaseNotes>Solid Edge ST5 and lower fixes.</releaseNotes>
+        <releaseNotes>Fixed SolidEdgeAddIn.Register().</releaseNotes>
         <language>en-US</language>
         <tags>interop solidedge community contrib</tags>
         <dependencies>

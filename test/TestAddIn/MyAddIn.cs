@@ -81,10 +81,14 @@ namespace TestAddIn
                 settings.Titles.Add(englishCulture, "SolidEdge.Community.TestAddIn");
                 settings.Summaries.Add(englishCulture, "Solid Edge Addin in .NET 4.0.");
 
+                var spanishCultere = CultureInfo.GetCultureInfo(3082);
+                settings.Titles.Add(spanishCultere, "SolidEdge.Community.TestAddIn");
+                settings.Summaries.Add(spanishCultere, "Solid Edge Addin in .NET 4.0.");
+
                 // Optionally, you can add additional locales.
-                //var germanCultere = CultureInfo.GetCultureInfo(1031);
-                //settings.Titles.Add(germanCultere, "SolidEdge.Community.TestAddIn");
-                //settings.Summaries.Add(germanCultere, "Solid Edge Addin in .NET 4.0.");
+                var germanCultere = CultureInfo.GetCultureInfo(1031);
+                settings.Titles.Add(germanCultere, "SolidEdge.Community.TestAddIn");
+                settings.Summaries.Add(germanCultere, "Solid Edge Addin in .NET 4.0.");
 
                 MyAddIn.Register(settings);
             }

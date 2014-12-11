@@ -592,13 +592,16 @@ namespace SolidEdgeCommunity.AddIn
             // hex: 0x0409
             // HKEY_CLASSES_ROOT\CLSID\{ADDIN_GUID}\409
 
-            int hexLCID = int.Parse(culture.LCID.ToString("X4"));
-            string keyName = hexLCID.ToString();
+            // Convert LCID to hexadecimal.
+            var lcid = culture.LCID.ToString("X4");
+
+            // Remove leading zeros.
+            lcid = lcid.TrimStart('0');
 
             using (RegistryKey baseKey = CreateBaseKey(t.GUID))
             {
                 // Write the title value.
-                baseKey.SetValue(keyName, title);
+                baseKey.SetValue(lcid, title);
             }
         }
 
@@ -610,15 +613,18 @@ namespace SolidEdgeCommunity.AddIn
             // hex: 0x0409
             // HKEY_CLASSES_ROOT\CLSID\{ADDIN_GUID}\Summary\409
 
-            int hexLCID = int.Parse(culture.LCID.ToString("X4"));
-            string keyName = hexLCID.ToString();
+            // Convert LCID to hexadecimal.
+            var lcid = culture.LCID.ToString("X4");
+
+            // Remove leading zeros.
+            lcid = lcid.TrimStart('0');
 
             using (RegistryKey baseKey = CreateBaseKey(t.GUID))
             {
                 // Write the summary key.
                 using (RegistryKey summaryKey = baseKey.CreateSubKey("Summary"))
                 {
-                    summaryKey.SetValue(keyName, summary);
+                    summaryKey.SetValue(lcid, summary);
                 }
             }
         }
