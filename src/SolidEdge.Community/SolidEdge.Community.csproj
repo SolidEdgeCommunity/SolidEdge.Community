@@ -66,6 +66,8 @@
     <Compile Include="ConnectionPointController.cs" />
     <Compile Include="ConnectionPointControllerBase.cs" />
     <Compile Include="Extensions\DrawingViewExtensions.cs" />
+    <Compile Include="IsolatedTask.cs" />
+    <Compile Include="IsolatedTaskProxy.cs" />
     <Compile Include="Runtime\InteropServices\ComObject.cs" />
     <Compile Include="OleMessageFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

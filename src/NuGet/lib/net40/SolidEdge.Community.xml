@@ -820,6 +820,155 @@
             Terminates all advisory connections previously established.
             </summary>
         </member>
+        <member name="T:SolidEdgeCommunity.IsolatedTask`1">
+            <summary>
+            Generic class used to execute an IsolatedTaskProxy implementation.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTask`1.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:SolidEdgeCommunity.IsolatedTaskProxy">
+            <summary>
+            Abstract base class to be used with IsolatedTask&lt;T&gt;.
+            </summary>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InitializeLifetimeService">
+            <summary>
+            Lifetime services as disabled by default.
+            </summary>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread(System.Action)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <param name="target"></param>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``1(System.Action{``0},``0)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``2(System.Action{``0,``1},``0,``1)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``3(System.Action{``0,``1,``2},``0,``1,``2)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <typeparam name="TArg3">The type of arg3.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``4(System.Action{``0,``1,``2,``3},``0,``1,``2,``3)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <typeparam name="TArg3">The type of arg3.</typeparam>
+            <typeparam name="TArg4">The type of arg4.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+            <param name="arg4"></param>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``1(System.Func{``0})">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TResult">The type of the return value.</typeparam>
+            <param name="target"></param>
+            <returns>An instance of TResult.</returns>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``2(System.Func{``0,``1},``0)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TResult">The type of the return value.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <returns>An instance of TResult.</returns>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``3(System.Func{``0,``1,``2},``0,``1)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <typeparam name="TResult">The type of the return value.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <returns>An instance of TResult.</returns>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``4(System.Func{``0,``1,``2,``3},``0,``1,``2)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <typeparam name="TArg3">The type of arg3.</typeparam>
+            <typeparam name="TResult">The type of the return value.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+            <returns>An instance of TResult.</returns>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.InvokeSTAThread``5(System.Func{``0,``1,``2,``3,``4},``0,``1,``2,``3)">
+            <summary>
+            Invokes a method in a STA thread.
+            </summary>
+            <typeparam name="TArg1">The type of arg1.</typeparam>
+            <typeparam name="TArg2">The type of arg2.</typeparam>
+            <typeparam name="TArg3">The type of arg3.</typeparam>
+            <typeparam name="TArg4">The type of arg4.</typeparam>
+            <typeparam name="TResult">The type of the return value.</typeparam>
+            <param name="target"></param>
+            <param name="arg1"></param>
+            <param name="arg2"></param>
+            <param name="arg3"></param>
+            <param name="arg4"></param>
+            <returns>An instance of TResult.</returns>
+        </member>
+        <member name="M:SolidEdgeCommunity.IsolatedTaskProxy.UnwrapRuntimeCallableWrapper``1(System.Object)">
+            <summary>
+            Unwraps a runtime callable wrapper (RCW) that is passed across AppDomains.
+            </summary>
+            <typeparam name="TInterface"></typeparam>
+            <param name="rcw"></param>
+            <returns></returns>
+        </member>
+        <member name="P:SolidEdgeCommunity.IsolatedTaskProxy.Application">
+            <summary>
+            Solid Edge Application property.
+            </summary>
+        </member>
+        <member name="P:SolidEdgeCommunity.IsolatedTaskProxy.Document">
+            <summary>
+            Solid Edge Application property.
+            </summary>
+        </member>
         <member name="T:SolidEdgeCommunity.Runtime.InteropServices.ComObject">
             <summary>
             COM object wrapper class.
