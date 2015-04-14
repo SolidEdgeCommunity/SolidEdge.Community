@@ -1,5 +1,11 @@
 SolidEdge.Community Repostiory
 ================
+
+### Latest Releases
+|Library           |Version           |Downloads         |
+|:-----------------|:-----------------|:-----------------|
+|**SolidEdge.Community**|[![Nuget count](http://img.shields.io/nuget/v/SolidEdge.Community.svg)](https://www.nuget.org/packages/SolidEdge.Community/)|[![Nuget downloads](http://img.shields.io/nuget/dt/SolidEdge.Community.svg)](https://www.nuget.org/packages/SolidEdge.Community/)|
+
 This is the central repository for the [SolidEdge.Community](http://www.nuget.org/packages/SolidEdge.Community) NuGet package.
 
 ---
