@@ -16,14 +16,21 @@ namespace QA
         {
             try
             {
-                var application = SolidEdgeUtils.Connect(true, true);
+                var application = SolidEdgeUtils.Connect();
+                var draftDocument = application.GetActiveDocument<SolidEdgeDraft.DraftDocument>();
 
-                using (var task = new IsolatedTask<MyIsolatedTask>())
+                foreach (var drawingObject in draftDocument.ActiveSection.EnumerateDrawingObjects())
                 {
-                    task.Proxy.Application = null;// application;
-                    task.Proxy.Document = application.GetActiveDocument();
-                    var results = task.Proxy.DoWork("Hello world!");
+                    var type = SolidEdgeCommunity.Runtime.InteropServices.ComObject.GetType(drawingObject);
+                    Console.WriteLine(drawingObject);
                 }
+                
+                //using (var task = new IsolatedTask<MyIsolatedTask>())
+                //{
+                //    task.Proxy.Application = null;// application;
+                //    task.Proxy.Document = application.GetActiveDocument();
+                //    var results = task.Proxy.DoWork("Hello world!");
+                //}
             }
             catch (System.Exception ex)
             {

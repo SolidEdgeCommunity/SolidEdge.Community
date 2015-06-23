@@ -87,21 +87,21 @@ namespace SolidEdgeCommunity.Extensions
             return environments.Item(application.ActiveEnvironment);
         }
 
-        /// <summary>
-        /// Returns the application events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEApplicationEvents_Event GetApplicationEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEApplicationEvents_Event)application.ApplicationEvents;
-        }
+        ///// <summary>
+        ///// Returns the application events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEApplicationEvents_Event GetApplicationEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEApplicationEvents_Event)application.ApplicationEvents;
+        //}
 
-        /// <summary>
-        /// Returns the application window events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEApplicationWindowEvents_Event GetApplicationWindowEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEApplicationWindowEvents_Event)application.ApplicationWindowEvents;
-        }
+        ///// <summary>
+        ///// Returns the application window events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEApplicationWindowEvents_Event GetApplicationWindowEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEApplicationWindowEvents_Event)application.ApplicationWindowEvents;
+        //}
 
         /// <summary>
         /// Returns an environment specified by CATID.
@@ -122,21 +122,21 @@ namespace SolidEdgeCommunity.Extensions
             return null;
         }
 
-        /// <summary>
-        /// Returns the feature library events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEFeatureLibraryEvents_Event GetFeatureLibraryEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEFeatureLibraryEvents_Event)application.FeatureLibraryEvents;
-        }
+        ///// <summary>
+        ///// Returns the feature library events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEFeatureLibraryEvents_Event GetFeatureLibraryEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEFeatureLibraryEvents_Event)application.FeatureLibraryEvents;
+        //}
 
-        /// <summary>
-        /// Returns the file UI events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEFileUIEvents_Event GetFileUIEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEFileUIEvents_Event)application.FileUIEvents;
-        }
+        ///// <summary>
+        ///// Returns the file UI events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEFileUIEvents_Event GetFileUIEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEFileUIEvents_Event)application.FileUIEvents;
+        //}
 
         /// <summary>
         /// Returns the value of a specified global constant.
@@ -167,21 +167,21 @@ namespace SolidEdgeCommunity.Extensions
             return NativeWindow.FromHandle(new IntPtr(application.hWnd));
         }
 
-        /// <summary>
-        /// Returns the new file UI events.
-        /// </summary>
-        public static SolidEdgeFramework.ISENewFileUIEvents_Event GetNewFileUIEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISENewFileUIEvents_Event)application.NewFileUIEvents;
-        }
+        ///// <summary>
+        ///// Returns the new file UI events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISENewFileUIEvents_Event GetNewFileUIEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISENewFileUIEvents_Event)application.NewFileUIEvents;
+        //}
 
-        /// <summary>
-        /// Returns the SEEC events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEECEvents_Event GetSEECEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEECEvents_Event)application.SEECEvents;
-        }
+        ///// <summary>
+        ///// Returns the SEEC events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEECEvents_Event GetSEECEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEECEvents_Event)application.SEECEvents;
+        //}
 
         /// <summary>
         /// Returns a Process object that represents the application prcoess.
@@ -191,13 +191,13 @@ namespace SolidEdgeCommunity.Extensions
             return Process.GetProcessById(application.ProcessID);
         }
 
-        /// <summary>
-        /// Returns the shortcut menu events.
-        /// </summary>
-        public static SolidEdgeFramework.ISEShortCutMenuEvents_Event GetShortcutMenuEvents(this SolidEdgeFramework.Application application)
-        {
-            return (SolidEdgeFramework.ISEShortCutMenuEvents_Event)application.ShortcutMenuEvents;
-        }
+        ///// <summary>
+        ///// Returns the shortcut menu events.
+        ///// </summary>
+        //public static SolidEdgeFramework.ISEShortCutMenuEvents_Event GetShortcutMenuEvents(this SolidEdgeFramework.Application application)
+        //{
+        //    return (SolidEdgeFramework.ISEShortCutMenuEvents_Event)application.ShortcutMenuEvents;
+        //}
 
         /// <summary>
         /// Returns a Version object that represents the application version.

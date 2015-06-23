@@ -31,9 +31,9 @@
     <DocumentationFile>bin\Release\SolidEdge.Community.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.SolidEdge, Version=107.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Interop.SolidEdge, Version=107.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Interop.SolidEdge.107.3.0\lib\net40\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\..\packages\Interop.SolidEdge.107.6.0\lib\net40\Interop.SolidEdge.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,26 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddIn\EdgeBarControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AddIn\EdgeBarController.cs" />
-    <Compile Include="AddIn\EdgeBarPage.cs" />
-    <Compile Include="AddIn\EdgeBarPageAttribute.cs" />
-    <Compile Include="AddIn\ExtensionMethods.cs" />
-    <Compile Include="AddIn\NativeResourceAttribute.cs" />
-    <Compile Include="AddIn\RegistrationSettings.cs" />
-    <Compile Include="AddIn\ViewOverlay.cs" />
-    <Compile Include="AddIn\ViewOverlayController.cs" />
-    <Compile Include="AddIn\Ribbon.cs" />
-    <Compile Include="AddIn\RibbonControl.cs" />
-    <Compile Include="AddIn\RibbonController.cs" />
-    <Compile Include="AddIn\RibbonGroup.cs" />
-    <Compile Include="AddIn\RibbonTab.cs" />
-    <Compile Include="AddIn\SolidEdgeAddIn.cs" />
     <Compile Include="ConnectionPointController.cs" />
     <Compile Include="ConnectionPointControllerBase.cs" />
+    <Compile Include="EventSink.cs" />
+    <Compile Include="Extensions\AssemblyDocumentExtensions.cs" />
+    <Compile Include="Extensions\DraftDocumentExtensions.cs" />
     <Compile Include="Extensions\DrawingViewExtensions.cs" />
+    <Compile Include="Extensions\OccurrenceExtensions.cs" />
+    <Compile Include="Extensions\PartDocumentExtensions.cs" />
+    <Compile Include="Extensions\SectionExtensions.cs" />
+    <Compile Include="Extensions\SheetMetalDocumentExtensions.cs" />
+    <Compile Include="Extensions\SolidEdgeDocumentExtensions.cs" />
+    <Compile Include="Extensions\WeldmentDocumentExtensions.cs" />
     <Compile Include="IsolatedTask.cs" />
     <Compile Include="IsolatedTaskProxy.cs" />
     <Compile Include="Runtime\InteropServices\ComObject.cs" />
@@ -85,7 +77,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="SolidEdge.Community.targets" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
