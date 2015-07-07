@@ -32,13 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.SolidEdge, Version=107.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Interop.SolidEdge, Version=108.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\Interop.SolidEdge.107.6.0\lib\net40\Interop.SolidEdge.dll</HintPath>
+      <HintPath>..\..\packages\Interop.SolidEdge.108.0.0\lib\net40\Interop.SolidEdge.dll</HintPath>
     </Reference>
-    <Reference Include="SolidEdge.Community.Reader, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="SolidEdge.Community.Reader, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\SolidEdge.Community.Reader.1.7.0\lib\net40\SolidEdge.Community.Reader.dll</HintPath>
+      <HintPath>..\..\packages\SolidEdge.Community.Reader.1.8.0\lib\net40\SolidEdge.Community.Reader.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

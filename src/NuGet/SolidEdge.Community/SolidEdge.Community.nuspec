@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>SolidEdge.Community</id>
-        <version>107.6.0</version>
+        <version>108.0.0</version>
         <title>SolidEdge.Community</title>
         <authors>Jason Newell</authors>
         <owners>Jason Newell</owners>
@@ -12,11 +12,11 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Community provided package for automating Solid Edge.</description>
         <summary />
-        <releaseNotes>Moved SolidEdge.Comminity.AddIn namespace separate package.</releaseNotes>
+        <releaseNotes>Updated to Solid Edge ST8.</releaseNotes>
         <language>en-US</language>
         <tags>interop solidedge community contrib</tags>
         <dependencies>
-            <dependency id="Interop.SolidEdge" version="107.6.0" />
+            <dependency id="Interop.SolidEdge" version="108.0.0" />
         </dependencies>
     </metadata>
     <files>
