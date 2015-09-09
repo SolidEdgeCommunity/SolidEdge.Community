@@ -49,9 +49,11 @@
     <Compile Include="ConnectionPointController.cs" />
     <Compile Include="ConnectionPointControllerBase.cs" />
     <Compile Include="EventSink.cs" />
+    <Compile Include="Extensions\Arc3DExtensions.cs" />
     <Compile Include="Extensions\AssemblyDocumentExtensions.cs" />
     <Compile Include="Extensions\DraftDocumentExtensions.cs" />
     <Compile Include="Extensions\DrawingViewExtensions.cs" />
+    <Compile Include="Extensions\Line3DExtensions.cs" />
     <Compile Include="Extensions\OccurrenceExtensions.cs" />
     <Compile Include="Extensions\PartDocumentExtensions.cs" />
     <Compile Include="Extensions\SectionExtensions.cs" />
