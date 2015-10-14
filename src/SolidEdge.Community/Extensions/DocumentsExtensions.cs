@@ -128,7 +128,7 @@ namespace SolidEdgeCommunity.Extensions
         /// </summary>
         public static TDocumentType Open<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename) where TDocumentType : class
         {
-            return (TDocumentType)documents.Open(Filename, Missing.Value, Missing.Value, Missing.Value, Missing.Value, Missing.Value);
+            return (TDocumentType)documents.Open(Filename);
         }
 
         /// <summary>
@@ -137,6 +137,24 @@ namespace SolidEdgeCommunity.Extensions
         public static TDocumentType Open<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename, object DocRelationAutoServer, object AltPath, object RecognizeFeaturesIfPartTemplate, object RevisionRuleOption, object StopFileOpenIfRevisionRuleNotApplicable)
         {
             return (TDocumentType)documents.Open(Filename, DocRelationAutoServer, AltPath, RecognizeFeaturesIfPartTemplate, RevisionRuleOption, StopFileOpenIfRevisionRuleNotApplicable);
+        }
+
+        /// <summary>
+        /// Opens an existing Solid Edge document in the background with no window.
+        /// </summary>
+        public static TDocumentType OpenInBackground<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename)
+        {
+            ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
+            return (TDocumentType)documents.Open(Filename, JDOCUMENTPROP_NOWINDOW);
+        }
+
+        /// <summary>
+        /// Opens an existing Solid Edge document in the background with no window.
+        /// </summary>
+        public static TDocumentType OpenInBackground<TDocumentType>(this SolidEdgeFramework.Documents documents, string Filename, object AltPath, object RecognizeFeaturesIfPartTemplate, object RevisionRuleOption, object StopFileOpenIfRevisionRuleNotApplicable)
+        {
+            ulong JDOCUMENTPROP_NOWINDOW = 0x00000008;
+            return (TDocumentType)documents.Open(Filename, JDOCUMENTPROP_NOWINDOW, AltPath, RecognizeFeaturesIfPartTemplate, RevisionRuleOption, StopFileOpenIfRevisionRuleNotApplicable);
         }
     }
 }
