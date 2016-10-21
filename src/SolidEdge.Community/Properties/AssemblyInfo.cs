@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 
 // ONLY INCREMENT THIS VALUE ON MAJOR RELEASES!
-[assembly: AssemblyVersion("108.0.0.0")]
+[assembly: AssemblyVersion("109.0.0.0")]
 
 // This version should match the NuGet version.
-[assembly: AssemblyFileVersion("108.2.0.0")]
+[assembly: AssemblyFileVersion("109.0.0.0")]
