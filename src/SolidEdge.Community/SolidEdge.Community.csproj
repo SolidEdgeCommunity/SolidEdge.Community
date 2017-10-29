@@ -1,92 +1,32 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0E7A7AE5-0D9D-4608-A959-FD0C90E06841}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SolidEdgeCommunity</RootNamespace>
-    <AssemblyName>SolidEdge.Community</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>NET40</TargetFramework>
+    <Version>110.0.0</Version>
+    <Authors>Jason Newell</Authors>
+    <Company>Jason Newell</Company>
+    <Description>Community provided package for automating Solid Edge.</Description>
+    <PackageLicenseUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community</PackageProjectUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/SolidEdgeCommunity/SolidEdge.Community/master/media/icon.png</PackageIconUrl>
+    <RepositoryUrl>https://github.com/SolidEdgeCommunity/SolidEdge.Community.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>interop solidedge community contrib</PackageTags>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>bin\Release\net40\SolidEdge.Community.xml</DocumentationFile>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\SolidEdge.Community.xml</DocumentationFile>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Interop.SolidEdge, Version=109.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Interop.SolidEdge.109.0.0\lib\net40\Interop.SolidEdge.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
+    <PackageReference Include="Interop.SolidEdge" Version="[110.0.0, 111.0.0)">
+      <PrivateAssets>None</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ConnectionPointController.cs" />
-    <Compile Include="ConnectionPointControllerBase.cs" />
-    <Compile Include="EventSink.cs" />
-    <Compile Include="Extensions\Arc3DExtensions.cs" />
-    <Compile Include="Extensions\AssemblyDocumentExtensions.cs" />
-    <Compile Include="Extensions\DraftDocumentExtensions.cs" />
-    <Compile Include="Extensions\DrawingViewExtensions.cs" />
-    <Compile Include="Extensions\Line3DExtensions.cs" />
-    <Compile Include="Extensions\OccurrenceExtensions.cs" />
-    <Compile Include="Extensions\PartDocumentExtensions.cs" />
-    <Compile Include="Extensions\SectionExtensions.cs" />
-    <Compile Include="Extensions\SheetMetalDocumentExtensions.cs" />
-    <Compile Include="Extensions\SolidEdgeDocumentExtensions.cs" />
-    <Compile Include="Extensions\WeldmentDocumentExtensions.cs" />
-    <Compile Include="IsolatedTask.cs" />
-    <Compile Include="IsolatedTaskProxy.cs" />
-    <Compile Include="Runtime\InteropServices\ComObject.cs" />
-    <Compile Include="OleMessageFilter.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\PropertiesExtensions.cs" />
-    <Compile Include="Extensions\PropertySetsExtensions.cs" />
-    <Compile Include="Extensions\MouseExtensions.cs" />
-    <Compile Include="Extensions\SheetExtensions.cs" />
-    <Compile Include="Runtime\InteropServices\ComTypes\IDispatch.cs" />
-    <Compile Include="SolidEdgeUtils.cs" />
-    <Compile Include="Extensions\ApplicationExtensions.cs" />
-    <Compile Include="Extensions\DocumentsExtensions.cs" />
-    <Compile Include="Extensions\EnvironmentExtensions.cs" />
-    <Compile Include="Extensions\RefPlanesExtensions.cs" />
-    <Compile Include="Extensions\WindowExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!--<Import Project="SolidEdge.Community.targets" />-->
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

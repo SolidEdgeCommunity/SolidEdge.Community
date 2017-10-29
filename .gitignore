@@ -217,3 +217,5 @@ pip-log.txt
 # Added by Jason Newell
 .exe
 .dll
+/.vs
+/src/.vs/SolidEdge.Community/v15/Server/sqlite3
