@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdge.Community", "SolidEdge.Community\SolidEdge.Community.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA", "QA\QA.csproj", "{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QA", "QA\QA.csproj", "{367F7E41-0AE9-4D4B-8AFF-953CB29A68A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SolidEdge.Community", "SolidEdge.Community\SolidEdge.Community.csproj", "{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49DAFAF3-C18C-4B3D-9006-BBFBFEEBBCB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{367F7E41-0AE9-4D4B-8AFF-953CB29A68A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{367F7E41-0AE9-4D4B-8AFF-953CB29A68A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{367F7E41-0AE9-4D4B-8AFF-953CB29A68A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{367F7E41-0AE9-4D4B-8AFF-953CB29A68A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D948FED-8E3E-4DA5-8E44-0F6AD7DD46CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

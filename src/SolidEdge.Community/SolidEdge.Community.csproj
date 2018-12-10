@@ -1,8 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>NET40</TargetFramework>
-    <Version>110.0.0</Version>
+    <TargetFrameworks>NET40;NET45</TargetFrameworks>
+    <AssemblyVersion>219.0.0.0</AssemblyVersion>
+    <FileVersion>219.0.0.0</FileVersion>
+    <Version>219.0.0</Version>
     <Authors>Jason Newell</Authors>
     <Company>Jason Newell</Company>
     <Description>Community provided package for automating Solid Edge.</Description>
@@ -15,12 +17,16 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|NET40|AnyCPU'">
     <DocumentationFile>bin\Release\net40\SolidEdge.Community.xml</DocumentationFile>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|NET45|AnyCPU'">
+    <DocumentationFile>bin\Release\net45\SolidEdge.Community.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Interop.SolidEdge" Version="[110.0.0, 111.0.0)">
+    <PackageReference Include="Interop.SolidEdge" Version="219.0.0">
       <PrivateAssets>None</PrivateAssets>
     </PackageReference>
   </ItemGroup>

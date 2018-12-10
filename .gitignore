@@ -218,4 +218,4 @@ pip-log.txt
 .exe
 .dll
 /.vs
-/src/.vs/SolidEdge.Community/v15/Server/sqlite3
+/src/.vs
