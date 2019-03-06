@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using SolidEdgeFileProperties;
 
 namespace SolidEdgeCommunity.Runtime.InteropServices
 {
@@ -51,6 +52,23 @@ namespace SolidEdgeCommunity.Runtime.InteropServices
             return (T)value;
         }
 
+        /// <summary>
+        /// Returns a strongly typed property by PropertyID using the specified COM object.
+        /// </summary>
+        /// <typeparam name="T">The type of the property to return.</typeparam>
+        /// <param name="comObject"></param>
+        /// <param name="id">The PropertyID of the property to retrieve.</param>
+        /// <returns></returns>
+        public static T GetPropertyValue<T>(object comObject, PropertyIDs id)
+        {
+            if (Marshal.IsComObject(comObject) == false) throw new InvalidComObjectException();
+
+            var type = comObject.GetType();
+            var value = type.InvokeMember(Enum.GetName(typeof(PropertyIDs), id), System.Reflection.BindingFlags.GetProperty, null, comObject, null);
+
+            return (T)value;
+        }
+        
         /// <summary>
         /// Returns a strongly typed property by name using the specified COM object.
         /// </summary>
